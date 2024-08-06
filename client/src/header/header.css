@@ -1,4 +1,6 @@
 .header {
-  background: red;
-  height: 35svh;
+  height: 60svh;
+  background-image: url("/header.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
