@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=VT323&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=VT323&display=swap");
+
+:root {
+  --dark-brown: #894e3f;
+  --nav-text: #eee1ba;
+  --light-shade: #f0d7a7;
+  --tan: #9c634f;
+  --light-brown: #c37960;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+header {
+  width: 100%;
+  background: var(--dark-brown);
+  line-height: 60px;
+}
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: min(100% - 25px, 1300px);
+  margin: auto;
+}
+nav h1 {
+  color: var(--nav-text);
+  font-family: "VT323", monospace;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 3rem;
+}
+nav ul {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+nav ul li {
+  list-style: none;
+  font-family: "VT323", monospace;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1.5rem;
+  color: var(--nav-text);
+  cursor: pointer;
+}
+nav .nav-right {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+nav .nav-right img {
+  aspect-ratio: 1/1;
+  height: 40px;
+}
+nav button {
+  background: transparent;
+  font-size: 1.2rem;
+  color: var(--light-shade);
+  border: 1px solid var(--light-brown);
+  padding: 5px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+nav button:hover {
+  background: var(--tan);
+}
+nav .nav-right .nav-search-icon {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+nav .nav-right .nav-search-icon .dot {
+  position: absolute;
+  color: var(--nav-text);
+  top: 0;
+  right: -10%;
+  font-weight: bold;
+}
+.active {
+  color: #000;
+}
