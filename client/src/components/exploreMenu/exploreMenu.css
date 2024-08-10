@@ -50,7 +50,7 @@
   background: var(--light-shade);
   border: none;
 }
-.active {
+.explore-menu .active {
   transform: translateY(-20px);
   box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.5);
 }

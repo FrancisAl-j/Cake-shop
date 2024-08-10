@@ -4,7 +4,9 @@ import { food_list } from "../menu-list";
 export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
-  const contextValue = {};
+  const contextValue = {
+    food_list,
+  };
 
   return (
     <StoreContext.Provider value={contextValue}>
