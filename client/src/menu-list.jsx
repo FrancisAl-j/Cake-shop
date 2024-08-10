@@ -1,4 +1,9 @@
 import Cake from "./assets/cake.jpg";
+import StarEmpty from "./assets/star.png";
+
+export const Star_rate = {
+  star_rate: StarEmpty,
+};
 
 export const menu_list = [
   {

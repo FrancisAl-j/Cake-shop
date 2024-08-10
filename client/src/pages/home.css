@@ -1,0 +1,4 @@
+.home-container {
+  width: min(100% - 25px, 1450px);
+  margin: auto;
+}
