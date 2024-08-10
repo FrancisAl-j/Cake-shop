@@ -1,6 +1,9 @@
 import { menu_list } from "../../menu-list";
 import "./foodItem.css";
 import Star from "../../assets/star.png";
+import Plus from "../../assets/plus.png";
+import PlusGreen from "../../assets/plus-green.png";
+import MinusRed from "../../assets/minus-red.png";
 import { useState } from "react";
 
 const FoodItem = ({ id, name, price, description, image }) => {
@@ -10,6 +13,32 @@ const FoodItem = ({ id, name, price, description, image }) => {
     <div className="food-item" key={id}>
       <div className="food-item-img-container">
         <img className="food-item-image" src={image} alt="" />
+        {!itemCounts ? (
+          <div className="plus-container">
+            <img
+              className="plus"
+              src={Plus}
+              onClick={() => setItemCounts((prev) => prev + 1)}
+              alt=""
+            />
+          </div>
+        ) : (
+          <div className="count-container">
+            <img
+              className="minus-red"
+              src={MinusRed}
+              onClick={() => setItemCounts((prev) => prev - 1)}
+              alt=""
+            />
+            <p>{itemCounts}</p>
+            <img
+              className="plus-green"
+              src={PlusGreen}
+              onClick={() => setItemCounts((prev) => prev + 1)}
+              alt=""
+            />
+          </div>
+        )}
       </div>
 
       <div className="food-item-info">
