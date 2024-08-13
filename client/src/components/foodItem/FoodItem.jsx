@@ -4,21 +4,23 @@ import Star from "../../assets/star.png";
 import Plus from "../../assets/plus.png";
 import PlusGreen from "../../assets/plus-green.png";
 import MinusRed from "../../assets/minus-red.png";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { StoreContext } from "../../context/StoreContext";
 
 const FoodItem = ({ id, name, price, description, image }) => {
   const [itemCounts, setItemCounts] = useState(0);
+  const { cartItems, addToCart, removeFromCart } = useContext(StoreContext);
 
   return (
     <div className="food-item" key={id}>
       <div className="food-item-img-container">
         <img className="food-item-image" src={image} alt="" />
-        {!itemCounts ? (
+        {!cartItems[id] ? (
           <div className="plus-container">
             <img
               className="plus"
               src={Plus}
-              onClick={() => setItemCounts((prev) => prev + 1)}
+              onClick={() => addToCart(id)}
               alt=""
             />
           </div>
@@ -27,14 +29,14 @@ const FoodItem = ({ id, name, price, description, image }) => {
             <img
               className="minus-red"
               src={MinusRed}
-              onClick={() => setItemCounts((prev) => prev - 1)}
+              onClick={() => removeFromCart(id)}
               alt=""
             />
-            <p>{itemCounts}</p>
+            <p>{cartItems[id]}</p>
             <img
               className="plus-green"
               src={PlusGreen}
-              onClick={() => setItemCounts((prev) => prev + 1)}
+              onClick={() => addToCart(id)}
               alt=""
             />
           </div>
