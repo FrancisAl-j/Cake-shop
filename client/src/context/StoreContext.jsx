@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { food_list } from "../menu-list";
 
 export const StoreContext = createContext(null);
@@ -23,6 +23,10 @@ const StoreContextProvider = (props) => {
       [itemId]: prev[itemId] - 1,
     }));
   };
+
+  useEffect(() => {
+    console.log(cartItems);
+  }, [cartItems]);
 
   const contextValue = {
     food_list,
