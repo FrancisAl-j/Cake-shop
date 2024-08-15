@@ -7,3 +7,54 @@
   --tan: #9c634f;
   --light-brown: #c37960;
 }
+
+footer {
+  background: var(--dark-brown);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 8vw;
+  padding-top: 80px;
+  color: var(--nav-text);
+}
+footer h1 {
+  color: var(--nav-text);
+  font-family: "VT323", monospace;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 3rem;
+}
+.footer-content {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 80px;
+}
+.footer-content-left,
+.footer-content-right,
+.footer-content-center {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 30px;
+}
+
+.footer-content-right li,
+.footer-content-center li {
+  list-style: none;
+  margin-bottom: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  cursor: pointer;
+}
+.footer-content-left img {
+  aspect-ratio: 1/1;
+  height: 40px;
+  margin: 0 10px;
+  cursor: pointer;
+}
+.footer-content-center h2,
+.footer-content-right h2 {
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+}
