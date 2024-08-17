@@ -24,19 +24,20 @@
   display: flex;
   width: 100%;
   gap: 20px;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   text-align: center;
   overflow-x: scroll;
   flex-wrap: nowrap;
-  padding-top: 35px;
+  padding-top: 30px;
 }
-
+.explore-menu-list::-webkit-scrollbar {
+  display: none;
+}
 .explore-menu-list img {
   aspect-ratio: 1/1;
-  height: 200px;
-  width: 200px;
-  max-width: 100px;
+  height: 160px;
+  width: 160px;
   border-radius: 50%;
   cursor: pointer;
   flex-shrink: 0;
@@ -54,6 +55,21 @@
 .explore-menu .active {
   transform: translateY(-20px);
   box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.5);
+}
+
+.scroll-container {
+  width: 500px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow-x: scroll;
+  flex-wrap: nowrap;
+}
+.box {
+  height: 100px;
+  width: 500px;
+  background: red;
+  flex-shrink: 0;
 }
 
 @media (max-width: 1050px) {

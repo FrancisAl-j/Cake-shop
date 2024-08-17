@@ -27,18 +27,24 @@ const Nav = () => {
           >
             About
           </li>
-          <li
-            onClick={() => setMenu("Menu")}
-            className={menu === "Menu" ? "active" : ""}
-          >
-            Menu
-          </li>
-          <li
-            onClick={() => setMenu("Contact-us")}
-            className={menu === "Contact-us" ? "active" : ""}
-          >
-            Contact us
-          </li>
+
+          <a href="#explore-menu">
+            <li
+              onClick={() => setMenu("Menu")}
+              className={menu === "Menu" ? "active" : ""}
+            >
+              Menu
+            </li>
+          </a>
+
+          <a href="#footer">
+            <li
+              onClick={() => setMenu("Contact-us")}
+              className={menu === "Contact-us" ? "active" : ""}
+            >
+              Contact us
+            </li>
+          </a>
         </ul>
 
         <div className="nav-right">
