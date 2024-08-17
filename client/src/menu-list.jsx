@@ -22,6 +22,14 @@ export const menu_list = [
     menu_name: "Designed Cake",
     menu_img: Cake,
   },
+  {
+    menu_name: "Designed Cake",
+    menu_img: Cake,
+  },
+  {
+    menu_name: "Designed Cake",
+    menu_img: Cake,
+  },
 ];
 
 export const food_list = [

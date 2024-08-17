@@ -32,7 +32,7 @@ nav h1 {
   font-family: "VT323", monospace;
   font-weight: 400;
   font-style: normal;
-  font-size: 3rem;
+  font-size: clamp(2rem, 3.5vw, 3rem);
 }
 nav ul {
   display: flex;
@@ -44,7 +44,7 @@ nav ul li {
   font-family: "VT323", monospace;
   font-weight: 400;
   font-style: normal;
-  font-size: 1.5rem;
+  font-size: clamp(0.9rem, 2vw, 1.5rem);
   color: var(--nav-text);
   cursor: pointer;
 }
@@ -59,7 +59,7 @@ nav .nav-right img {
 }
 nav button {
   background: transparent;
-  font-size: 1.2rem;
+  font-size: clamp(0.8rem, 2vw, 1.2rem);
   color: var(--light-shade);
   border: 1px solid var(--light-brown);
   padding: 5px 10px;
@@ -83,4 +83,35 @@ nav .nav-right .nav-search-icon .dot {
 }
 .active {
   color: #000;
+}
+
+/* For smaller screen sizes */
+@media (max-width: 1050px) {
+  .nav-right {
+    gap: 15px;
+  }
+  .nav-right img {
+    width: 25px;
+  }
+  nav button {
+    padding: 3px 5px;
+  }
+}
+
+@media (max-width: 900px) {
+  .nav-right {
+    gap: 10px;
+  }
+  .nav-right img {
+    width: 19px;
+  }
+  nav button {
+    padding: 3px 8px;
+  }
+}
+
+@media (max-width: 750px) {
+  nav ul {
+    display: none;
+  }
 }
