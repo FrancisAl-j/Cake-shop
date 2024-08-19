@@ -3,7 +3,7 @@ import Basket from "../assets/basket.svg";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const Nav = () => {
+const Nav = ({ setShowLogin }) => {
   const [menu, setMenu] = useState("Home");
 
   return (
@@ -53,7 +53,9 @@ const Nav = () => {
             <img src={Basket} alt="basket" />
             <div className="dot"></div>
           </div>
-          <button className="signinBtn">Sign in</button>
+          <button className="signinBtn" onClick={() => setShowLogin(true)}>
+            Sign in
+          </button>
         </div>
       </nav>
     </header>
