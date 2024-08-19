@@ -1,0 +1,29 @@
+:root {
+  --dark-brown: #894e3f;
+  --nav-text: #eee1ba;
+  --light-shade: #f0d7a7;
+  --tan: #9c634f;
+  --light-brown: #c37960;
+}
+
+.login-popup {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100svh;
+  background: #00000090;
+  display: grid;
+  place-items: center;
+}
+.login-popup-container {
+  width: min(100% - 30px, 370px);
+  background: var(--dark-brown);
+  color: var(--nav-text);
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding: 25px 30px;
+  border-radius: 8px;
+  font-size: 1.4rem;
+  animation: fadeIn, 0.5s;
+}
