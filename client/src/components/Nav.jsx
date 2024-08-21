@@ -49,10 +49,13 @@ const Nav = ({ setShowLogin }) => {
 
         <div className="nav-right">
           <img src={Search} alt="search" />
-          <div className="nav-search-icon">
-            <img src={Basket} alt="basket" />
-            <div className="dot"></div>
-          </div>
+          <Link to="/cart">
+            <div className="nav-search-icon">
+              <img src={Basket} alt="basket" />
+              <div className="dot"></div>
+            </div>
+          </Link>
+
           <button className="signinBtn" onClick={() => setShowLogin(true)}>
             Sign in
           </button>

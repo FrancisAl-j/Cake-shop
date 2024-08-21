@@ -73,6 +73,7 @@ nav button:hover {
 nav .nav-right .nav-search-icon {
   display: flex;
   align-items: center;
+  justify-content: center;
   position: relative;
 }
 nav .nav-right .nav-search-icon .dot {
