@@ -1,10 +1,12 @@
 import Search from "../assets/search.svg";
 import Basket from "../assets/basket.svg";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { StoreContext } from "../context/StoreContext";
 
 const Nav = ({ setShowLogin }) => {
   const [menu, setMenu] = useState("Home");
+  const { getTotalCartAmount } = useContext(StoreContext);
 
   return (
     <header>
@@ -52,7 +54,7 @@ const Nav = ({ setShowLogin }) => {
           <Link to="/cart">
             <div className="nav-search-icon">
               <img src={Basket} alt="basket" />
-              <div className="dot"></div>
+              <div className={getTotalCartAmount() ? "dot" : ""}></div>
             </div>
           </Link>
 
