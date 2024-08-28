@@ -34,12 +34,14 @@ const PlaceOrder = () => {
             <hr />
             <div className="cart-total-details">
               <p>Delivery fee</p>
-              <p>₱ {2}</p>
+              <p>₱ {getTotalCartAmount() === 0 ? 0 : 36}</p>
             </div>
             <hr />
             <div className="cart-total-details">
               <b>Total</b>
-              <p>₱ {getTotalCartAmount() + 2}</p>
+              <p>
+                ₱ {getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 2}
+              </p>
             </div>
           </div>
           <button>PROCEED TO PAYMENT</button>
