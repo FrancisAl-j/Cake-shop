@@ -1,0 +1,46 @@
+:root {
+  --dark-brown: #894e3f;
+  --nav-text: #eee1ba;
+  --light-shade: #f0d7a7;
+  --tan: #9c634f;
+  --light-brown: #c37960;
+}
+
+.place-order {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 50px;
+  margin-top: 100px;
+  width: min(100% - 30px, 1100px);
+  margin-inline: auto;
+}
+.place-order-left {
+  width: 100%;
+  max-width: max(30%, 500px);
+}
+.place-order-left .title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  margin-bottom: 50px;
+}
+.place-order-left input {
+  margin-bottom: 15px;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--dark-brown);
+  border-radius: 5px;
+  outline-color: var(--light-shade);
+}
+.place-order-left .multi-field {
+  display: flex;
+  gap: 10px;
+}
+.place-order-right {
+  width: 100%;
+  max-width: max(40%, 500px);
+}
+.cart-total button {
+  margin-top: 15px;
+}
