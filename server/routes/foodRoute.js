@@ -16,5 +16,6 @@ const upload = multer({ storage: storage }); // <- for uploading file images to 
 
 router.post("/add", upload.single("image"), controller.addProduct);
 router.get("/list", controller.fetchProduct);
+router.delete("/delete/:id", controller.deleteProduct);
 
 export default router;

@@ -30,4 +30,18 @@ const fetchProduct = async (req, res) => {
   }
 };
 
-export default { addProduct, fetchProduct };
+// delete specific food
+const deleteProduct = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const food = await foodModel.findById(id);
+    fs.unlink(`uploads/${food.image}`, () => {});
+
+    await foodModel.findByIdAndDelete(id);
+    res.status(200).json({ message: "Successfully deleted" });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+export default { addProduct, fetchProduct, deleteProduct };
