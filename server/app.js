@@ -22,6 +22,7 @@ app.get("/", (req, res) => {
 
 // Endpoints
 app.use("/api/food", foodRoute);
+app.use("/image", express.static("uploads"));
 
 app.listen(PORT, () => {
   console.log(`Listening to port ${PORT}`);

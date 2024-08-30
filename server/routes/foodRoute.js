@@ -8,12 +8,13 @@ const router = express.Router();
 const storage = multer.diskStorage({
   destination: "uploads",
   filename: (req, file, cb) => {
-    return cb(null, `${Data.now()}${file.originalname}`);
+    return cb(null, `${Date.now()}${file.originalname}`);
   },
 });
 
 const upload = multer({ storage: storage }); // <- for uploading file images to uploads folder line 8-15
 
 router.post("/add", upload.single("image"), controller.addProduct);
+router.get("/list", controller.fetchProduct);
 
 export default router;
