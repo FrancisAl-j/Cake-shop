@@ -1,0 +1,23 @@
+:root {
+  --dark-brown: #894e3f;
+  --nav-text: #eee1ba;
+  --light-shade: #f0d7a7;
+  --tan: #9c634f;
+  --light-brown: #c37960;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 4%;
+  background: var(--dark-brown);
+}
+.navbar .logo {
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  color: var(--nav-text);
+}
+.navbar .profile {
+  width: 40px;
+  aspect-ratio: 1/1;
+}

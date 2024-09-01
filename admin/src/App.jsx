@@ -1,7 +1,14 @@
+import Navbar from "./components/navbar/Navbar";
+import Sidebar from "./components/sidebar/Sidebar";
+
 const App = () => {
   return (
     <div>
-      <h1>Hello Admin</h1>
+      <Navbar />
+      <hr />
+      <div className="app-content">
+        <Sidebar />
+      </div>
     </div>
   );
 };
