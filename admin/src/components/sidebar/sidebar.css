@@ -1,3 +1,10 @@
+:root {
+  --dark-brown: #894e3f;
+  --nav-text: #eee1ba;
+  --light-shade: #f0d7a7;
+  --tan: #9c634f;
+  --light-brown: #c37960;
+}
 .sidebar {
   width: 18%;
   min-height: 100svh;
@@ -24,6 +31,10 @@
 .sidebar-option img {
   aspect-ratio: 1/1;
   width: 30px;
+}
+.sidebar-option.active {
+  background: var(--light-shade);
+  border-color: var(--dark-brown);
 }
 
 @media (max-width: 900px) {
