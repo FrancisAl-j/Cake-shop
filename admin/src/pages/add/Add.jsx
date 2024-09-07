@@ -1,6 +1,7 @@
 import "./add.css";
 import AddImage from "../../assets/addImage.jpg";
 import { useState } from "react";
+import axios from "axios";
 
 const Add = () => {
   const [image, setImage] = useState(false);
@@ -10,6 +11,7 @@ const Add = () => {
     price: "",
     category: "Cake",
   });
+  const [error, setError] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,9 +22,26 @@ const Add = () => {
     });
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const Data = new FormData();
+    const priceNumber = Number(formData.price);
+    Data.append("name", formData.name);
+    Data.append("description", formData.description);
+    Data.append("price", priceNumber);
+    Data.append("category", formData.category);
+    Data.append("image", image);
+    try {
+      const res = await axios.post("http://localhost:3000/api/food/add", Data);
+      console.log(res.data);
+    } catch (error) {
+      setError("Something went wrong creating a product");
+    }
+  };
+
   return (
     <div className="add">
-      <form className="flex-col">
+      <form onSubmit={handleSubmit} className="flex-col">
         <div className="add-img-upload flex-col">
           <p>Upload Image</p>
           <label htmlFor="image">
@@ -34,6 +53,7 @@ const Add = () => {
             id="image"
             hidden
             required
+            accept="image/*"
           />
         </div>
 

@@ -2,6 +2,9 @@ import foodModel from "../models/foodModel.js";
 import fs from "fs";
 
 const addProduct = async (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ error: "No file uploaded" });
+  }
   const { name, price, description, category } = req.body;
   const image_filename = `${req.file.filename}`;
   try {
