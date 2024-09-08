@@ -2,6 +2,7 @@ import "./add.css";
 import AddImage from "../../assets/addImage.jpg";
 import { useState } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Add = () => {
   const [image, setImage] = useState(false);
@@ -33,9 +34,18 @@ const Add = () => {
     Data.append("image", image);
     try {
       const res = await axios.post("http://localhost:3000/api/food/add", Data);
-      console.log(res.data);
+      if (res.status === 200) {
+        setFormData({
+          name: "",
+          description: "",
+          price: "",
+          category: "Cake",
+        });
+        setImage(false);
+        toast.success("Food added");
+      }
     } catch (error) {
-      setError("Something went wrong creating a product");
+      toast.error(res.data.message);
     }
   };
 
