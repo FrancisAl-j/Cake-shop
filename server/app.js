@@ -7,6 +7,7 @@ import cors from "cors";
 // Importing files
 import connectDB from "./config.js";
 import foodRoute from "./routes/foodRoute.js";
+import userRoute from "./routes/userRoute.js";
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.get("/", (req, res) => {
 // Endpoints
 app.use("/api/food", foodRoute);
 app.use("/images", express.static("uploads"));
+app.use("/api/user", userRoute);
 
 app.listen(PORT, () => {
   console.log(`Listening to port ${PORT}`);
