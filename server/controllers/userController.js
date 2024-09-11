@@ -55,7 +55,7 @@ const userLogin = async (req, res) => {
       return res.status(400).json({ message: "Invalid Credentials" });
     }
 
-    const isMatch = await bcrypt.compareSync(password, user.password);
+    const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(400).json({
         message: "Invalid Credemtials, please check your email or password.",
@@ -63,7 +63,8 @@ const userLogin = async (req, res) => {
     }
 
     const token = await createToken(user._id);
-    res.status(200).json(token);
+
+    res.status(200).json({ token: token });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }

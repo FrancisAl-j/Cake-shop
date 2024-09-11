@@ -89,6 +89,50 @@ nav .nav-right .nav-search-icon .dot {
 .active {
   color: #000;
 }
+.navbar-profile {
+  position: relative;
+}
+.navbar-profile img {
+  display: block;
+  cursor: pointer;
+}
+.nav-profile-dropdown {
+  position: absolute;
+  display: none;
+  right: 0;
+  z-index: 1;
+}
+.navbar-profile:hover .nav-profile-dropdown {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: var(--dark-brown);
+  padding: 5px 25px;
+  border-radius: 4px;
+  border: 1px solid var(--nav-text);
+  outline: 2px solid var(--light-shade);
+  list-style: none;
+}
+.nav-profile-dropdown hr {
+  width: 100%;
+  background-color: var(--nav-text);
+  border: none;
+  height: 2px;
+}
+.nav-profile-dropdown li {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  cursor: pointer;
+  width: 100%;
+}
+.nav-profile-dropdown li:hover {
+  color: #000;
+}
+.nav-profile-dropdown li img {
+  aspect-ratio: 1/1;
+  width: 20px;
+}
 
 /* For smaller screen sizes */
 @media (max-width: 1050px) {

@@ -1,13 +1,49 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./loginPopUp.css";
 import Cross from "../../assets/cross.svg";
+import axios from "axios";
+import { StoreContext } from "../../context/StoreContext";
 
 const LoginPopUp = ({ setShowLogin }) => {
+  const { setToken } = useContext(StoreContext);
   const [currState, setCurrState] = useState("Sign Up"); // current state
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const onLogin = async (e) => {
+    e.preventDefault();
+    let url;
+    if (currState === "Sign Up") {
+      url = "http://localhost:3000/api/user/register";
+    } else {
+      url = "http://localhost:3000/api/user/login";
+    }
+
+    const res = await axios.post(url, formData);
+
+    if (res.status === 200) {
+      setToken(res.data.token);
+      localStorage.setItem("token", res.data.token);
+      setShowLogin(false);
+    } else {
+      alert(res.data.message);
+    }
+  };
   return (
     <div className="login-popup">
-      <form className="login-popup-container">
+      <form onSubmit={onLogin} className="login-popup-container">
         <div className="login-popup-title">
           <h2>{currState}</h2>
           <img onClick={() => setShowLogin(false)} src={Cross} alt="" />
@@ -16,11 +52,32 @@ const LoginPopUp = ({ setShowLogin }) => {
           {currState === "Login" ? (
             <></>
           ) : (
-            <input type="text" placeholder="Your name" required />
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              placeholder="Your name"
+              required
+            />
           )}
 
-          <input type="email" placeholder="Email" required />
-          <input type="password" placeholder="Password" required />
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="Email"
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            placeholder="Password"
+            required
+          />
         </div>
         <button>{currState === "Sign Up" ? "Create User" : "Login"}</button>
         <div className="login-popup-condition">

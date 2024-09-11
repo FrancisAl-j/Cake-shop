@@ -3,10 +3,21 @@ import Basket from "../assets/basket.svg";
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { StoreContext } from "../context/StoreContext";
+import Profile from "../assets/profile.svg";
+import Logout from "../assets/logout.svg";
+import Bag from "../assets/bag.svg";
+import { useNavigate } from "react-router-dom";
 
 const Nav = ({ setShowLogin }) => {
   const [menu, setMenu] = useState("Home");
-  const { getTotalCartAmount } = useContext(StoreContext);
+  const { getTotalCartAmount, token, setToken } = useContext(StoreContext);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setToken("");
+    navigate("/");
+  };
 
   return (
     <header>
@@ -57,10 +68,26 @@ const Nav = ({ setShowLogin }) => {
               <div className={getTotalCartAmount() ? "dot" : ""}></div>
             </div>
           </Link>
-
-          <button className="signinBtn" onClick={() => setShowLogin(true)}>
-            Sign in
-          </button>
+          {!token ? (
+            <button className="signinBtn" onClick={() => setShowLogin(true)}>
+              Sign in
+            </button>
+          ) : (
+            <div className="navbar-profile">
+              <img src={Profile} alt="" />
+              <ul className="nav-profile-dropdown">
+                <li>
+                  <img src={Bag} alt="" />
+                  <p>Order</p>
+                </li>
+                <hr />
+                <li onClick={handleLogout}>
+                  <img src={Logout} alt="" />
+                  <p>Logout</p>
+                </li>
+              </ul>
+            </div>
+          )}
         </div>
       </nav>
     </header>
