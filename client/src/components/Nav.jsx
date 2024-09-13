@@ -10,12 +10,14 @@ import { useNavigate } from "react-router-dom";
 
 const Nav = ({ setShowLogin }) => {
   const [menu, setMenu] = useState("Home");
-  const { getTotalCartAmount, token, setToken } = useContext(StoreContext);
+  const { getTotalCartAmount, token, setToken, setCartItems } =
+    useContext(StoreContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     setToken("");
+    setCartItems({});
     navigate("/");
   };
 

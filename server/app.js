@@ -9,6 +9,7 @@ import connectDB from "./config.js";
 import foodRoute from "./routes/foodRoute.js";
 import userRoute from "./routes/userRoute.js";
 import cartRoute from "./routes/cartRoute.js";
+import orderRoute from "./routes/orderRoute.js";
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use("/api/food", foodRoute);
 app.use("/images", express.static("uploads"));
 app.use("/api/user", userRoute);
 app.use("/api/cart", cartRoute);
+app.use("/api/order", orderRoute);
 
 app.listen(PORT, () => {
   console.log(`Listening to port ${PORT}`);
