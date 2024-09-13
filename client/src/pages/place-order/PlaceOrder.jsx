@@ -1,26 +1,136 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { StoreContext } from "../../context/StoreContext";
 import "./placeOrder.css";
+import axios from "axios";
 
 const PlaceOrder = () => {
-  const { getTotalCartAmount } = useContext(StoreContext);
+  const { getTotalCartAmount, token, food_list, cartItems } =
+    useContext(StoreContext);
+
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    street: "",
+    city: "",
+    barangay: "",
+    zipcode: "",
+    contact: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  // Place order
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    let orderItems = [];
+    food_list.map((item) => {
+      if (cartItems[item._id] > 0) {
+        let itemInfo = item;
+        itemInfo["quantity"] = cartItems[item._id];
+        orderItems.push(itemInfo);
+      }
+    });
+    console.log(orderItems);
+
+    const orderData = {
+      address: formData,
+      items: orderItems,
+      amount: getTotalCartAmount() + 36,
+    };
+
+    const res = await axios.post(
+      `http://localhost:3000/api/order/place`,
+      orderData,
+      { headers: { token } }
+    );
+    if (res.status === 201) {
+      window.location.href = res.data.checkoutUrl;
+    } else {
+      alert("Error");
+    }
+  };
+
   return (
-    <form className="place-order">
+    <form onSubmit={handleSubmit} className="place-order">
       <div className="place-order-left">
         <p className="title">Delivery Information</p>
         <div className="multi-field">
-          <input type="text" placeholder="First Name" />
-          <input type="text" placeholder="Last Name" />
+          <input
+            required
+            type="text"
+            placeholder="First Name"
+            name="firstName"
+            value={formData.firstName}
+            onChange={handleChange}
+          />
+          <input
+            required
+            type="text"
+            placeholder="Last Name"
+            name="lastName"
+            value={formData.lastName}
+            onChange={handleChange}
+          />
         </div>
-        <input type="email" placeholder="Email" />
+        <input
+          required
+          type="email"
+          placeholder="Email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+        />
 
-        <input type="text" placeholder="Street" />
+        <input
+          required
+          type="text"
+          placeholder="Street"
+          name="street"
+          value={formData.street}
+          onChange={handleChange}
+        />
         <div className="multi-field">
-          <input type="text" placeholder="Barangay" />
-          <input type="text" placeholder="City" />
+          <input
+            required
+            type="text"
+            placeholder="Barangay"
+            name="barangay"
+            value={formData.barangay}
+            onChange={handleChange}
+          />
+          <input
+            required
+            type="text"
+            placeholder="City"
+            name="city"
+            value={formData.city}
+            onChange={handleChange}
+          />
         </div>
-        <input type="number" placeholder="Zip Codes" />
-        <input type="number" placeholder="Phone Number" />
+        <input
+          required
+          type="number"
+          placeholder="Zip Codes"
+          name="zipcode"
+          value={formData.zipcode}
+          onChange={handleChange}
+        />
+        <input
+          required
+          type="number"
+          placeholder="Phone Number"
+          name="contact"
+          value={formData.contact}
+          onChange={handleChange}
+        />
       </div>
 
       <div className="place-order-right">

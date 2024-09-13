@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import express from "express";
+
 import cors from "cors";
 
 // Importing files
@@ -32,6 +33,5 @@ app.use("/api/order", orderRoute);
 
 app.listen(PORT, () => {
   console.log(`Listening to port ${PORT}`);
-
   connectDB();
 });
