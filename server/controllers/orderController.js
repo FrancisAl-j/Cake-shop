@@ -2,10 +2,9 @@ import dotenv from "dotenv";
 dotenv.config();
 import Order from "../models/orderModel.js";
 import User from "../models/userModel.js";
-import stripe from "stripe";
 import axios from "axios";
 
-// Placing order user
+// Placing order user (Check out using paymongo)
 const placeOrder = async (req, res) => {
   const { items, amount, address } = req.body;
   const frontend_url = "http://localhost:5174";
@@ -65,10 +64,8 @@ const placeOrder = async (req, res) => {
             amount: amount * 100, // Amount in centavos
             description: "Order payment",
             metadata: metadata,
-            redirect: {
-              success: `${frontend_url}/verify?success=true&orderId=${newOrder._id}`, // Redirect on payment success
-              failed: `${frontend_url}/verify?success=false&orderId=${newOrder._id}`, // Redirect on payment failure
-            },
+            success_url: `${frontend_url}/verify?success=true&orderId=${newOrder._id}`, // Redirect on payment success
+            cancel_url: `${frontend_url}/verify?success=false&orderId=${newOrder._id}`, // Redirect on payment failure
             send_email_receipt: false, // Optional: Disable sending email receipts
             show_description: true, // Optional: Show description
             show_line_items: true, // Optional: Show line items
@@ -94,4 +91,19 @@ const placeOrder = async (req, res) => {
   }
 };
 
-export default { placeOrder };
+const verifyOrder = async (req, res) => {
+  const { orderId, success } = req.body;
+  try {
+    if (success == "true") {
+      await Order.findByIdAndUpdate(orderId, { payment: true });
+      res.status(201).json({ message: "Paid" });
+    } else {
+      await Order.findByIdAndDelete(orderId);
+      res.json({ message: "Not paid" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export default { placeOrder, verifyOrder };
