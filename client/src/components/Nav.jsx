@@ -79,10 +79,13 @@ const Nav = ({ setShowLogin }) => {
             <div className="navbar-profile">
               <img src={Profile} alt="" />
               <ul className="nav-profile-dropdown">
-                <li>
-                  <img src={Bag} alt="" />
-                  <p>Order</p>
-                </li>
+                <Link to="myorders">
+                  <li>
+                    <img src={Bag} alt="" />
+                    <p>Order</p>
+                  </li>
+                </Link>
+
                 <hr />
                 <li onClick={handleLogout}>
                   <img src={Logout} alt="" />

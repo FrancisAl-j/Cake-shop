@@ -96,7 +96,7 @@ const verifyOrder = async (req, res) => {
   try {
     if (success == "true") {
       await Order.findByIdAndUpdate(orderId, { payment: true });
-      res.status(201).json({ message: "Paid" });
+      res.status(200).json({ message: "Paid" });
     } else {
       await Order.findByIdAndDelete(orderId);
       res.json({ message: "Not paid" });
@@ -106,4 +106,24 @@ const verifyOrder = async (req, res) => {
   }
 };
 
-export default { placeOrder, verifyOrder };
+// Users order
+const userOrder = async (req, res) => {
+  try {
+    const orders = await Order.find({ userId: req.body.userId });
+    res.status(200).json(orders);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Fetching orders of all user, Admin side
+const fetchUserOrders = async (req, res) => {
+  try {
+    const orders = await Order.find();
+    res.status(200).json(orders);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export default { placeOrder, verifyOrder, userOrder, fetchUserOrders };

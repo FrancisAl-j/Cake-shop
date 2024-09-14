@@ -5,6 +5,8 @@ import Cart from "./pages/cart/Cart";
 import OrderPlace from "./pages/place-order/PlaceOrder";
 import Footer from "./components/footer/Footer";
 import LoginPopUp from "./components/loginPopUp/LoginPopUp";
+import Verify from "./pages/verify/Verify";
+import MyOrders from "./pages/myOrder/MyOrders";
 import { useState } from "react";
 
 const App = () => {
@@ -19,6 +21,8 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/order" element={<OrderPlace />} />
+          <Route path="/verify" element={<Verify />} />
+          <Route path="/myorders" element={<MyOrders />} />
         </Routes>
       </main>
       <Footer />
