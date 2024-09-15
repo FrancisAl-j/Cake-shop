@@ -7,4 +7,6 @@ router.post("/register", controller.registerUser);
 
 router.post("/login", controller.userLogin);
 
+router.put("/verify/:token", controller.verifyToken);
+
 export default router;

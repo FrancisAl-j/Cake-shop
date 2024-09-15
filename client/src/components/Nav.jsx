@@ -43,14 +43,12 @@ const Nav = ({ setShowLogin }) => {
             About
           </li>
           <Link to="/">
-            <a href="#explore-menu">
-              <li
-                onClick={() => setMenu("Menu")}
-                className={menu === "Menu" ? "active" : ""}
-              >
-                Menu
-              </li>
-            </a>
+            <li
+              onClick={() => setMenu("Menu")}
+              className={menu === "Menu" ? "active" : ""}
+            >
+              Menu
+            </li>
           </Link>
 
           <a href="#footer">

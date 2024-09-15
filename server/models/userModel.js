@@ -19,6 +19,15 @@ const userSchema = new mongoose.Schema(
       type: Object,
       default: {},
     },
+    temporaryToken: {
+      type: String,
+      required: true,
+    },
+    active: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
   },
   {
     minimize: false,
