@@ -119,7 +119,7 @@ const userOrder = async (req, res) => {
 // Fetching orders of all user, Admin side
 const fetchUserOrders = async (req, res) => {
   try {
-    const orders = await Order.find();
+    const orders = await Order.find().sort({ date: -1 });
     res.status(200).json(orders);
   } catch (error) {
     res.status(500).json({ message: error.message });
