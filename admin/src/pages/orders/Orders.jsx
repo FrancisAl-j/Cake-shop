@@ -22,6 +22,20 @@ const Orders = () => {
       console.log(error);
     }
   };
+
+  const handleUpdateStatus = async (e, orderId) => {
+    try {
+      const res = await axios.put("http://localhost:3000/api/order/status", {
+        orderId,
+        status: e.target.value,
+      });
+      if (res.status === 200) {
+        await fetchAllOrders();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="order add">
       <h3>Order Page</h3>
@@ -50,7 +64,10 @@ const Orders = () => {
               </div>
               <p>Items: {order.items.length}</p>
               <p>₱{order.amount}</p>
-              <select>
+              <select
+                onChange={(e) => handleUpdateStatus(e, order._id)}
+                value={order.status}
+              >
                 <option value="Processing">Processing</option>
                 <option value="Out for delivery">Out for delivery</option>
                 <option value="Delivered">Delivered</option>

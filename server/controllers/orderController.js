@@ -126,4 +126,21 @@ const fetchUserOrders = async (req, res) => {
   }
 };
 
-export default { placeOrder, verifyOrder, userOrder, fetchUserOrders };
+// API for updating order status
+const updateStatus = async (req, res) => {
+  const { status } = req.body;
+  try {
+    await Order.findByIdAndUpdate(req.body.orderId, { status });
+    res.status(200).json({ message: "Updated successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export default {
+  placeOrder,
+  verifyOrder,
+  userOrder,
+  fetchUserOrders,
+  updateStatus,
+};

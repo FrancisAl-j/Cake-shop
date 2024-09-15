@@ -10,5 +10,6 @@ router.get("/userorders", authMiddleware, controller.userOrder);
 
 // Admin side
 router.get("/list", controller.fetchUserOrders);
+router.put("/status", controller.updateStatus);
 
 export default router;
