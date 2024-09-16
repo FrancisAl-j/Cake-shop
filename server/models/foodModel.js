@@ -22,6 +22,10 @@ const foodSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    buys: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,

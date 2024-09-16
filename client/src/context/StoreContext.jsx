@@ -64,6 +64,10 @@ const StoreContextProvider = (props) => {
     };
 
     loadData();
+
+    return () => {
+      loadData();
+    };
   }, []);
 
   const fetchFood = async () => {

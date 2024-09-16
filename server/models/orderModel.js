@@ -29,6 +29,9 @@ const orderSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  paymentMethod: {
+    type: String,
+  },
 });
 
 const Order = mongoose.model("Order", orderSchema);

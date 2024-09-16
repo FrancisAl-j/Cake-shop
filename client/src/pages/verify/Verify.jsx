@@ -1,7 +1,8 @@
-import { useSearchParams, useNavigate } from "react-router-dom";
+import { useSearchParams, useNavigate, useParams } from "react-router-dom";
 import "./verify.css";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import { StoreContext } from "../../context/StoreContext";
 
 const Verify = () => {
   const navigate = useNavigate();
@@ -9,21 +10,30 @@ const Verify = () => {
   const success = searchParams.get("success");
   const orderId = searchParams.get("orderId");
 
+  const { token } = useContext(StoreContext);
+
   const verifyPayment = async () => {
-    const res = await axios.post(`http://localhost:3000/api/order/verify`, {
-      success,
-      orderId,
-    });
+    const res = await axios.post(
+      `http://localhost:3000/api/order/verify`,
+      {
+        success,
+        orderId,
+      },
+      { headers: { token } }
+    );
     if (res.status === 200) {
       navigate("/myorders");
+      window.location.reload();
     } else {
       navigate("/");
     }
   };
 
   useEffect(() => {
-    verifyPayment();
-  }, []);
+    if (token) {
+      verifyPayment();
+    }
+  }, [token]);
 
   return (
     <div className="verify">

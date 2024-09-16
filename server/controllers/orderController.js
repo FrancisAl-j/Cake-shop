@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import Order from "../models/orderModel.js";
 import User from "../models/userModel.js";
+import foodModel from "../models/foodModel.js";
 import axios from "axios";
 
 // Placing order user (Check out using paymongo)
@@ -10,7 +11,7 @@ const placeOrder = async (req, res) => {
   const frontend_url = "http://localhost:5174";
   const PAYMONGO_SECRET_KEY = Buffer.from(
     `${process.env.PAYMONGO_SECRET_KEY}:`
-  ).toString("base64");
+  ).toString("base64"); // Turn the secret key to base64
 
   try {
     const userId = req.body.userId;
@@ -22,7 +23,14 @@ const placeOrder = async (req, res) => {
     });
 
     await newOrder.save();
-    await User.findByIdAndUpdate(req.body.userId, { cartData: {} });
+
+    for (const item of req.body.items) {
+      await foodModel.findByIdAndUpdate(
+        item._id,
+        { $inc: { buys: item.quantity } }, //$inc means increment
+        { new: true }
+      );
+    }
 
     const line_items = req.body.items.map((item) => ({
       currency: "PHP",
@@ -94,12 +102,22 @@ const placeOrder = async (req, res) => {
 const verifyOrder = async (req, res) => {
   const { orderId, success } = req.body;
   try {
-    if (success == "true") {
+    await User.findById(req.body.userId);
+    if (success === "true") {
       await Order.findByIdAndUpdate(orderId, { payment: true });
+      await User.findByIdAndUpdate(req.body.userId, { cartData: {} });
       res.status(200).json({ message: "Paid" });
+    } else if (success === "false") {
+      const deletedOrder = await Order.findByIdAndDelete(orderId);
+      if (deletedOrder) {
+        res
+          .status(200)
+          .json({ message: "Order deleted, payment not successful" });
+      } else {
+        res.status(404).json({ message: "Order not found" });
+      }
     } else {
-      await Order.findByIdAndDelete(orderId);
-      res.json({ message: "Not paid" });
+      res.status(400).json({ message: "Invalid success value" });
     }
   } catch (error) {
     res.status(500).json({ message: error.message });
