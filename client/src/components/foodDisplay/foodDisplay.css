@@ -1,3 +1,11 @@
+:root {
+  --dark-brown: #894e3f;
+  --nav-text: #eee1ba;
+  --light-shade: #f0d7a7;
+  --tan: #9c634f;
+  --light-brown: #c37960;
+}
+
 .food-display {
   margin-top: 30px;
   width: 100%;
@@ -12,4 +20,40 @@
   margin: 30px auto;
   gap: 30px;
   row-gap: 20px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.page-item {
+  margin: 0 5px;
+}
+
+.page-link {
+  display: block;
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  color: var(--light-brown);
+  text-decoration: none;
+}
+
+.page-link:hover {
+  background-color: #f0f0f0;
+}
+
+.active .page-link {
+  background-color: var(--light-brown);
+  color: white;
+  border-color: var(--light-brown);
+}
+
+.page-item.disabled .page-link {
+  color: #ddd;
+  pointer-events: none;
+  cursor: default;
 }

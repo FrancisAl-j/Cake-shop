@@ -47,4 +47,45 @@ const deleteProduct = async (req, res) => {
   }
 };
 
-export default { addProduct, fetchProduct, deleteProduct };
+const paginatedFood = async (req, res) => {
+  const { query } = req.query; // Query to use for searching on foods
+  const searchQuery = query ? String(query) : ""; // Checks if he query is empty if it's empty it will display all the foods
+  try {
+    const page = parseInt(req.query.page); // Query the the current page of the food
+    const limit = parseInt(req.query.limit); // limit the food display in the web app
+
+    let foods;
+    if (searchQuery) {
+      foods = await foodModel.find({ name: { $regex: query, $options: "i" } });
+    } else {
+      foods = await foodModel.find();
+    }
+
+    const startIndex = (page - 1) * limit;
+    const lastIndex = page * limit;
+
+    const results = {};
+    results.totalFoods = foods.length;
+    results.pageCount = Math.ceil(foods.length / limit);
+
+    if (lastIndex < foods.length) {
+      results.next = {
+        page: page + 1,
+      };
+    }
+
+    if (startIndex > 0) {
+      results.previous = {
+        page: page - 1,
+      };
+    }
+
+    const result = foods.slice(startIndex, lastIndex);
+
+    res.status(200).json({ results, result });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export default { addProduct, fetchProduct, deleteProduct, paginatedFood };

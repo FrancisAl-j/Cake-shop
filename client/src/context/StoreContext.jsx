@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState, useRef } from "react";
 import axios from "axios";
 
 export const StoreContext = createContext(null);
@@ -7,6 +7,10 @@ const StoreContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
   const [token, setToken] = useState("");
   const [food_list, setFood_list] = useState([]);
+  const [pageCount, setPageCount] = useState(1);
+  const [limit, setLimit] = useState(10);
+  const [query, setQuery] = useState("");
+  const currentPage = useRef();
 
   const addToCart = async (itemId) => {
     if (!cartItems[itemId]) {
@@ -54,9 +58,9 @@ const StoreContextProvider = (props) => {
   };
 
   useEffect(() => {
+    currentPage.current = 1;
     const loadData = async () => {
-      await fetchFood();
-
+      await paginatedFood();
       if (localStorage.getItem("token")) {
         setToken(localStorage.getItem("token"));
         await fetchCartItems(localStorage.getItem("token"));
@@ -64,17 +68,24 @@ const StoreContextProvider = (props) => {
     };
 
     loadData();
+  }, [query]);
 
-    return () => {
-      loadData();
-    };
-  }, []);
+  const handlePageClick = (e) => {
+    currentPage.current = e.selected + 1;
+    paginatedFood();
+  };
 
-  const fetchFood = async () => {
+  const paginatedFood = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/food/list");
+      const res = await axios.get(
+        `http://localhost:3000/api/food/paginate/foods?page=${currentPage.current}&limit=${limit}`,
+        {
+          params: { query },
+        }
+      );
       if (res.status === 200) {
-        setFood_list(res.data);
+        setFood_list(res.data.result);
+        setPageCount(res.data.results.pageCount);
       }
     } catch (error) {
       console.log(error);
@@ -107,6 +118,10 @@ const StoreContextProvider = (props) => {
     getTotalCartAmount,
     token,
     setToken,
+    pageCount,
+    handlePageClick,
+    query,
+    setQuery,
   };
 
   return (

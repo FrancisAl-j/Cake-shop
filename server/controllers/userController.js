@@ -62,9 +62,9 @@ const registerUser = async (req, res) => {
     const activateEmail = {
       from: "Cake Shop Staff, staff@CakeShop@gmail.com",
       to: user.email,
-      subject: "Activate Account",
+      subject: "Account Activation",
       text: `Hello ${user.name}, Activate your account by clinic the provided link`, // Plain text fallback
-      html: `Hello <strong>${user.name}</strong>,<br><br>Your account has been successfully activated!<br><br>
+      html: `Hello <strong>${user.name}</strong>,<br><br>Activate your account by clicking the link provided!<br><br>
   <a href="http://localhost:5174/verify/email/${user.temporaryToken}">Click here to log in</a>`,
     };
 

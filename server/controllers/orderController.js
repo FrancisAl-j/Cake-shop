@@ -84,7 +84,7 @@ const placeOrder = async (req, res) => {
 
     // Make the API request to PayMongo to create the checkout session
     const paymongoResponse = await axios.request(options);
-    //console.log("PayMongo Response:", paymongoResponse.data);
+    console.log("PayMongo Response:", paymongoResponse.data);
     // Send back the checkout URL to the frontend
     res.status(201).json({
       orderId: newOrder._id,
