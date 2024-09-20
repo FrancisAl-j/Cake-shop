@@ -5,7 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const PlaceOrder = () => {
-  const { getTotalCartAmount, token, food_list, cartItems } =
+  const { getTotalCartAmount, token, cartItemDetails, cartItems } =
     useContext(StoreContext);
 
   const [formData, setFormData] = useState({
@@ -32,7 +32,7 @@ const PlaceOrder = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let orderItems = [];
-    food_list.map((item) => {
+    cartItemDetails.map((item) => {
       if (cartItems[item._id] > 0) {
         let itemInfo = item;
         itemInfo["quantity"] = cartItems[item._id];

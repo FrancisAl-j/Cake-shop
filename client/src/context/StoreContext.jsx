@@ -7,6 +7,7 @@ const StoreContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
   const [token, setToken] = useState("");
   const [food_list, setFood_list] = useState([]);
+  const [cartItemDetails, setCartItemDetails] = useState([]);
   const [pageCount, setPageCount] = useState(1);
   const [limit, setLimit] = useState(10);
   const [query, setQuery] = useState("");
@@ -47,11 +48,15 @@ const StoreContextProvider = (props) => {
   };
 
   const getTotalCartAmount = () => {
+    if (!food_list.length) return 0; // If food list isn't loaded yet, return 0
+
     let totalAmount = 0;
     for (const item in cartItems) {
       if (cartItems[item] > 0) {
         let foodInfo = food_list.find((product) => product._id === item);
-        totalAmount += foodInfo.price * cartItems[item];
+        if (foodInfo) {
+          totalAmount += foodInfo.price * cartItems[item];
+        }
       }
     }
     return totalAmount;
@@ -61,6 +66,7 @@ const StoreContextProvider = (props) => {
     currentPage.current = 1;
     const loadData = async () => {
       await paginatedFood();
+      await fetchFood();
       if (localStorage.getItem("token")) {
         setToken(localStorage.getItem("token"));
         await fetchCartItems(localStorage.getItem("token"));
@@ -70,9 +76,9 @@ const StoreContextProvider = (props) => {
     loadData();
   }, [query]);
 
-  const handlePageClick = (e) => {
+  const handlePageClick = async (e) => {
     currentPage.current = e.selected + 1;
-    paginatedFood();
+    await paginatedFood();
   };
 
   const paginatedFood = async () => {
@@ -86,6 +92,17 @@ const StoreContextProvider = (props) => {
       if (res.status === 200) {
         setFood_list(res.data.result);
         setPageCount(res.data.results.pageCount);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchFood = async () => {
+    try {
+      const res = await axios.get("http://localhost:3000/api/food/list");
+      if (res.status === 200) {
+        setCartItemDetails(res.data);
       }
     } catch (error) {
       console.log(error);
@@ -122,6 +139,7 @@ const StoreContextProvider = (props) => {
     handlePageClick,
     query,
     setQuery,
+    cartItemDetails,
   };
 
   return (

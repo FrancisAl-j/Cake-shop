@@ -4,6 +4,66 @@ import Order from "../models/orderModel.js";
 import User from "../models/userModel.js";
 import foodModel from "../models/foodModel.js";
 import axios from "axios";
+import nodemailer from "nodemailer";
+
+/* const emailReceipt = {
+  from: "Cake Shop Staff, staff@CakeShop@gmail.com",
+  to: user.email,
+  subject: "E-receipt",
+  text: `Hello ${user.name}, This is your payment receipt`, // Plain text fallback
+  html: `Hello <strong>${user.name}</strong>,<br><br>Receipt<br><br>
+      <ul>
+        <li></li>
+      </ul>`,
+}; */
+
+const transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false,
+  auth: {
+    user: "kikobilas123@gmail.com",
+    pass: process.env.APP_PASSWORD,
+  },
+});
+
+const sendEmailReceipt = async (orderId, userEmail, amount, lineItems) => {
+  let mailOptions = {
+    from: "your-email@gmail.com",
+    to: userEmail,
+    subject: "Receipt for Your Order",
+    html: `
+      <h2>Receipt for Order ${orderId}</h2>
+      <p><strong>Total Amount:</strong> ${amount} PHP</p>
+      <h3>Line Items:</h3>
+      <ul>
+        ${lineItems
+          .map(
+            (item) => `<li>${item.name} - ${item.price * item.quantity}</li>`
+          )
+          .join("")}
+      </ul>
+      <p>Thank you for your purchase!</p>
+    `,
+  };
+
+  const info = await transporter.sendMail(mailOptions);
+  console.log(`Email sent: ${info.response}`);
+};
+
+const sendEmailOutForDelivery = async (orderId, userEmail) => {
+  const mailOptions = {
+    from: "cakeshop@gmail.com",
+    to: userEmail,
+    subject: "Status Of Order",
+    html: `<h1>Status of order</h1> </br></br>
+         <h3>Order ID : ${orderId}</h3>
+         <p>Your order is out for delivery</p>
+    `,
+  };
+
+  await transporter.sendMail(mailOptions);
+};
 
 // Placing order user (Check out using paymongo)
 const placeOrder = async (req, res) => {
@@ -84,7 +144,7 @@ const placeOrder = async (req, res) => {
 
     // Make the API request to PayMongo to create the checkout session
     const paymongoResponse = await axios.request(options);
-    console.log("PayMongo Response:", paymongoResponse.data);
+    //console.log("PayMongo Response:", paymongoResponse.data);
     // Send back the checkout URL to the frontend
     res.status(201).json({
       orderId: newOrder._id,
@@ -102,13 +162,19 @@ const placeOrder = async (req, res) => {
 const verifyOrder = async (req, res) => {
   const { orderId, success } = req.body;
   try {
-    await User.findById(req.body.userId);
+    const user = await User.findById(req.body.userId);
+    const order = await Order.findById(orderId);
     if (success === "true") {
       await Order.findByIdAndUpdate(orderId, { payment: true });
       await User.findByIdAndUpdate(req.body.userId, { cartData: {} });
+      await sendEmailReceipt(order._id, user.email, order.amount, order.items);
+      console.log("Successfully sent a receipt");
+
       res.status(200).json({ message: "Paid" });
     } else if (success === "false") {
       const deletedOrder = await Order.findByIdAndDelete(orderId);
+      console.log("Receipt didn't send");
+
       if (deletedOrder) {
         res
           .status(200)
@@ -148,7 +214,20 @@ const fetchUserOrders = async (req, res) => {
 const updateStatus = async (req, res) => {
   const { status } = req.body;
   try {
-    await Order.findByIdAndUpdate(req.body.orderId, { status });
+    const order = await Order.findByIdAndUpdate(req.body.orderId, { status });
+    const userId = order.userId;
+    const user = await User.findById(userId);
+
+    const updatedOrder = await Order.findById(order._id);
+    console.log(`Updated Order: ${updatedOrder}`);
+    if (updatedOrder.status === "Out for delivery") {
+      try {
+        await sendEmailOutForDelivery(updatedOrder._id, user.email);
+        console.log("Successfully sent email!");
+      } catch (emailError) {
+        console.error("Failed to send email:", emailError);
+      }
+    }
     res.status(200).json({ message: "Updated successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
