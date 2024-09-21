@@ -2,6 +2,7 @@ import "./sidebar.css";
 import List from "../../assets/list.svg";
 import Orders from "../../assets/orders.svg";
 import Add from "../../assets/add.svg";
+import Dashboard from "../../assets/dashboard.svg";
 import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
@@ -21,6 +22,11 @@ const Sidebar = () => {
         <NavLink to="/orders" className="sidebar-option">
           <img src={Orders} alt="" />
           <p>Orders</p>
+        </NavLink>
+
+        <NavLink to="/dashboard" className="sidebar-option">
+          <img src={Dashboard} alt="" />
+          <p>Dashboard</p>
         </NavLink>
       </div>
     </div>

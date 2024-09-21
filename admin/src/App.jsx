@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Add from "./pages/add/Add";
 import List from "./pages/list/List";
 import Orders from "./pages/orders/Orders";
+import Dashboard from "./pages/dashboard/Dashboard";
 
 // Necessary for toastifying messages
 import { ToastContainer } from "react-toastify";
@@ -21,6 +22,7 @@ const App = () => {
           <Route path="/add" element={<Add />} />
           <Route path="/list" element={<List />} />
           <Route path="/orders" element={<Orders />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </div>
     </div>

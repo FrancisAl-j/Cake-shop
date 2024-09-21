@@ -219,7 +219,6 @@ const updateStatus = async (req, res) => {
     const user = await User.findById(userId);
 
     const updatedOrder = await Order.findById(order._id);
-    console.log(`Updated Order: ${updatedOrder}`);
     if (updatedOrder.status === "Out for delivery") {
       try {
         await sendEmailOutForDelivery(updatedOrder._id, user.email);
