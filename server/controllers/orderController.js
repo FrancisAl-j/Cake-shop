@@ -65,6 +65,20 @@ const sendEmailOutForDelivery = async (orderId, userEmail) => {
   await transporter.sendMail(mailOptions);
 };
 
+const deliveredEmail = async (orderId, userEmail) => {
+  const mailOptions = {
+    from: "cakeshop@gmail.com",
+    to: userEmail,
+    subject: "Order Delivered",
+    html: `<h1>Your order has been delivered</h1>
+          <h3>Your order ID: ${orderId}</h3>
+          <p>Thank you for purchasing</p>
+    `,
+  };
+
+  transporter.sendMail(mailOptions);
+};
+
 // Placing order user (Check out using paymongo)
 const placeOrder = async (req, res) => {
   const { items, amount, address } = req.body;
@@ -226,10 +240,29 @@ const updateStatus = async (req, res) => {
       } catch (emailError) {
         console.error("Failed to send email:", emailError);
       }
+    } else if (updatedOrder.status === "Delivered") {
+      try {
+        await deliveredEmail(updatedOrder._id, user.email);
+        console.log("Successfully sent email!");
+      } catch (error) {
+        console.log(`Failed to send email`);
+      }
     }
     res.status(200).json({ message: "Updated successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
+  }
+};
+
+// Cancel order
+const cancelOrder = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const order = await Order.findByIdAndDelete(id);
+
+    res.status(200).json({ message: "Successfully deleted" });
+  } catch (error) {
+    console.log(error);
   }
 };
 
@@ -239,4 +272,5 @@ export default {
   userOrder,
   fetchUserOrders,
   updateStatus,
+  cancelOrder,
 };

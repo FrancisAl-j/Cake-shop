@@ -88,4 +88,27 @@ const paginatedFood = async (req, res) => {
   }
 };
 
-export default { addProduct, fetchProduct, deleteProduct, paginatedFood };
+// Display new food or product
+const newProduct = async (req, res) => {
+  const currentDate = new Date();
+  const weekAgo = new Date(currentDate.setDate(currentDate.getDate() - 7));
+  try {
+    const foods = await foodModel.find();
+
+    const newFoods = foods.filter((food) => {
+      return new Date(food.createdAt) >= weekAgo;
+    });
+
+    res.status(200).json(newFoods);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export default {
+  addProduct,
+  fetchProduct,
+  deleteProduct,
+  paginatedFood,
+  newProduct,
+};

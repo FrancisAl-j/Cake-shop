@@ -18,5 +18,6 @@ router.post("/add", upload.single("image"), controller.addProduct);
 router.get("/list", controller.fetchProduct);
 router.delete("/delete/:id", controller.deleteProduct);
 router.get("/paginate/foods", controller.paginatedFood);
+router.get("/new", controller.newProduct);
 
 export default router;

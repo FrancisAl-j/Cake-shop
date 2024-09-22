@@ -3,6 +3,7 @@ import "./myOrder.css";
 import { StoreContext } from "../../context/StoreContext";
 import axios from "axios";
 import Parcel from "../../assets/parcel.svg";
+import { toast } from "react-toastify";
 
 const MyOrders = () => {
   const { token } = useContext(StoreContext);
@@ -24,6 +25,23 @@ const MyOrders = () => {
       if (res.status === 200) {
         setData(res.data);
         console.log(res.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleCancelOrder = async (id) => {
+    try {
+      if (window.confirm("Are you sure you want to cancel this order?")) {
+        const res = await axios.delete(
+          `http://localhost:3000/api/order/delete/${id}`
+        );
+
+        if (res.status === 200) {
+          await fetchOrders();
+          toast.success("Order cancelled.");
+        }
       }
     } catch (error) {
       console.log(error);
@@ -51,7 +69,9 @@ const MyOrders = () => {
               <p>
                 <span>&#x25cf;</span> <b>{order.status}</b>
               </p>
-              <button>Track Order</button>
+              <button onClick={() => handleCancelOrder(order._id)}>
+                Cancel Order
+              </button>
             </div>
           );
         })}

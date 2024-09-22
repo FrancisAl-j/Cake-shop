@@ -11,5 +11,6 @@ router.get("/userorders", authMiddleware, controller.userOrder);
 // Admin side
 router.get("/list", controller.fetchUserOrders);
 router.put("/status", controller.updateStatus);
+router.delete("/delete/:id", controller.cancelOrder);
 
 export default router;
