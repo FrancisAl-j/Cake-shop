@@ -266,6 +266,19 @@ const cancelOrder = async (req, res) => {
   }
 };
 
+// For Dashboard
+const allOrders = async (req, res) => {
+  try {
+    const orders = await Order.find();
+
+    const allCustomersOrder = orders.length;
+
+    res.status(200).json(allCustomersOrder);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 export default {
   placeOrder,
   verifyOrder,
@@ -273,4 +286,5 @@ export default {
   fetchUserOrders,
   updateStatus,
   cancelOrder,
+  allOrders,
 };

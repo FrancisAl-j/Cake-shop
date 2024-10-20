@@ -12,5 +12,6 @@ router.get("/userorders", authMiddleware, controller.userOrder);
 router.get("/list", controller.fetchUserOrders);
 router.put("/status", controller.updateStatus);
 router.delete("/delete/:id", controller.cancelOrder);
+router.get("/all-orders", controller.allOrders);
 
 export default router;
