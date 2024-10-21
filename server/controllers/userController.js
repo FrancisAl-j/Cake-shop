@@ -175,4 +175,16 @@ const userLogin = async (req, res) => {
   }
 };
 
+// Admin Side
+const allUsers = async (req, res) => {
+  try {
+    const users = await User.find();
+    const allCustomers = users.length;
+
+    res.status(200).json(allCustomers);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 export default { registerUser, userLogin, verifyToken };
