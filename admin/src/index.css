@@ -20,6 +20,7 @@ hr {
 }
 .app-content {
   display: flex;
+  position: relative;
 }
 .flex-col {
   display: flex;
@@ -30,4 +31,7 @@ hr {
 .cursor {
   cursor: pointer;
   color: red;
+}
+.main {
+  position: relative;
 }

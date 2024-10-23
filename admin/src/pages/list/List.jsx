@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import "./list.css";
 import axios from "axios";
 import { toast } from "react-toastify";
+import UpdateCake from "../../components/popup/UpdateCake";
 
 const List = () => {
+  const [productId, setProductId] = useState(null);
   const [foods, setFoods] = useState([]);
   useEffect(() => {
     fetchFood();
@@ -34,6 +36,12 @@ const List = () => {
       console.log(error);
     }
   };
+
+  const handleCakeId = (e, id) => {
+    e.preventDefault();
+    setProductId(id);
+  };
+
   return (
     <div className="list add flex-col">
       <h1>List</h1>
@@ -53,12 +61,26 @@ const List = () => {
             <p>{food.name}</p>
             <p>{food.category}</p>
             <p>₱{food.price}</p>
-            <p
-              className="cursor"
-              onClick={() => handleRemove(food._id, food.name)}
-            >
-              X
-            </p>
+            <div className="actions">
+              <p
+                className="cursor"
+                onClick={() => handleRemove(food._id, food.name)}
+              >
+                X
+              </p>
+              <button onClick={(e) => handleCakeId(e, food._id)}>Update</button>
+              {productId === food._id && (
+                <UpdateCake
+                  id={food._id}
+                  name={food.name}
+                  price={food.price}
+                  description={food.description}
+                  image={food.image}
+                  category={food.category}
+                  setProductId={setProductId}
+                />
+              )}
+            </div>
           </div>
         );
       })}
