@@ -4,3 +4,42 @@
   --warm-orange: #f4a261;
   --warm-red: #e76f51;
 }
+
+.stats-info {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 0 20px;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 250px;
+  align-items: center;
+  padding: 10px;
+  border-radius: 20px;
+}
+.container h3 {
+  align-self: flex-start;
+}
+.container p {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+}
+.container p,
+h3 {
+  color: #fff;
+}
+.container .data {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 15px 5px;
+  justify-content: space-evenly;
+}
+.users {
+  background: var(--warm-green);
+}
+.orders {
+  background: var(--warm-red);
+}

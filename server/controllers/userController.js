@@ -187,4 +187,4 @@ const allUsers = async (req, res) => {
   }
 };
 
-export default { registerUser, userLogin, verifyToken };
+export default { registerUser, userLogin, verifyToken, allUsers };

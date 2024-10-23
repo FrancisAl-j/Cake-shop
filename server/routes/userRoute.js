@@ -9,4 +9,7 @@ router.post("/login", controller.userLogin);
 
 router.put("/verify/:token", controller.verifyToken);
 
+// Admin side
+router.get("/users", controller.allUsers);
+
 export default router;
