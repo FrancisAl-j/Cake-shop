@@ -19,5 +19,6 @@ router.get("/list", controller.fetchProduct);
 router.delete("/delete/:id", controller.deleteProduct);
 router.get("/paginate/foods", controller.paginatedFood);
 router.get("/new", controller.newProduct);
+router.put("/update/:id", upload.single("image"), controller.updateFood);
 
 export default router;

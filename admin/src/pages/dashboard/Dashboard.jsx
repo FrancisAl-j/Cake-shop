@@ -1,11 +1,13 @@
 import React from "react";
 import StatsContainer from "./Reusables/StatsContainer";
+import "./dashboard.css";
+import FetchFoods from "./productsBought/FetchFoods";
 
 const Dashboard = () => {
   return (
-    <div>
-      <h1>Dashboard</h1>
+    <div className="dashboard-container">
       <StatsContainer />
+      <FetchFoods />
     </div>
   );
 };

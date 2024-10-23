@@ -105,10 +105,32 @@ const newProduct = async (req, res) => {
   }
 };
 
+// Updating the foods
+const updateFood = async (req, res) => {
+  const { id } = req.params;
+  const { name, price, description, category } = req.body;
+  const image_filename = `${req.file.filename}`;
+  try {
+    const updatedData = {
+      name,
+      price,
+      description,
+      category,
+      image: image_filename,
+    };
+    const product = await foodModel.findById(id, updatedData);
+
+    res.status(200).json(product);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 export default {
   addProduct,
   fetchProduct,
   deleteProduct,
   paginatedFood,
   newProduct,
+  updateFood,
 };

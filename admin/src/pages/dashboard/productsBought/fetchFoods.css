@@ -1,0 +1,11 @@
+.food-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+  border-bottom: 1px solid #000;
+}
+.food-container img {
+  aspect-ratio: 1/1;
+  width: 50px;
+}
