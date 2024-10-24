@@ -107,6 +107,9 @@ const newProduct = async (req, res) => {
 
 // Updating the foods
 const updateFood = async (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ error: "No file uploaded" });
+  }
   const { id } = req.params;
   const { name, price, description, category } = req.body;
   const image_filename = `${req.file.filename}`;
@@ -118,7 +121,9 @@ const updateFood = async (req, res) => {
       category,
       image: image_filename,
     };
-    const product = await foodModel.findById(id, updatedData);
+    const product = await foodModel.findByIdAndUpdate(id, updatedData, {
+      new: true,
+    });
 
     res.status(200).json(product);
   } catch (error) {

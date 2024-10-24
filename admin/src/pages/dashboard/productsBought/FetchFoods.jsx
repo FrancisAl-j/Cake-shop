@@ -21,6 +21,11 @@ const FetchFoods = () => {
   };
   return (
     <div>
+      <div className="title-container">
+        <h2>Cakes</h2>
+        <h2>Name</h2>
+        <h2>Purchase</h2>
+      </div>
       {foods &&
         foods.map((food, index) => {
           return (

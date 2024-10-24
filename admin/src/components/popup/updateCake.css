@@ -12,6 +12,7 @@
   background: #fff;
   width: min(100% - 25px, 400px);
   padding: 10px;
+  border-radius: 10px;
 }
 .update-form header {
   display: flex;
@@ -22,4 +23,19 @@
   color: red;
   font-weight: bold;
   cursor: pointer;
+}
+.update-form form .form-elements {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+  gap: 10px;
+}
+.update-form form .form-elements img {
+  align-self: self-start;
+  cursor: pointer;
+}
+.update-form form .form-elements .pair-elements {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }

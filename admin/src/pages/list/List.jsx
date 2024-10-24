@@ -75,9 +75,10 @@ const List = () => {
                   name={food.name}
                   price={food.price}
                   description={food.description}
-                  image={food.image}
+                  itemImage={food.image}
                   category={food.category}
                   setProductId={setProductId}
+                  fetchFood={fetchFood}
                 />
               )}
             </div>
