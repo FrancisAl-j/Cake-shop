@@ -22,6 +22,10 @@ const adminSchema = new mongoose.Schema({
     type: String,
     default: "Admin",
   },
+  active: {
+    type: String,
+    default: false,
+  },
 });
 
 const Admin = mongoose.model("Admin", adminSchema);

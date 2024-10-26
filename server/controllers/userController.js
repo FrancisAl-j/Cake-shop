@@ -163,7 +163,7 @@ const userLogin = async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(400).json({
-        message: "Invalid Credemtials, please check your email or password.",
+        message: "Invalid Credentials, please check your email or password.",
       });
     }
 
