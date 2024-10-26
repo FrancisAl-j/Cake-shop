@@ -20,7 +20,7 @@ const FetchFoods = () => {
     }
   };
   return (
-    <div>
+    <div className="food-wrapper">
       <div className="title-container">
         <h2>Cakes</h2>
         <h2>Name</h2>

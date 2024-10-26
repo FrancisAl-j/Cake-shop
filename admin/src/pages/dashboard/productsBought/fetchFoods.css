@@ -1,9 +1,17 @@
+:root {
+  --warm-green: #36ba98;
+  --warm-yellow: #e9c46a;
+  --warm-orange: #f4a261;
+  --warm-red: #e76f51;
+}
+
 .food-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 5px 0;
-  border-bottom: 1px solid #000;
+  margin: 10px 0;
+  padding: 5px;
+  border: 2px solid var(--warm-green);
 }
 .food-container img {
   aspect-ratio: 1/1;
