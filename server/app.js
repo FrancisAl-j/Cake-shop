@@ -12,6 +12,8 @@ import userRoute from "./routes/userRoute.js";
 import cartRoute from "./routes/cartRoute.js";
 import orderRoute from "./routes/orderRoute.js";
 import topCakeRoute from "./routes/topCakeRoute.js";
+import saleRoute from "./routes/saleRoute.js";
+import affiliateRoute from "./routes/affiliateRoute.js";
 
 const app = express();
 
@@ -32,6 +34,8 @@ app.use("/api/user", userRoute);
 app.use("/api/cart", cartRoute);
 app.use("/api/order", orderRoute);
 app.use("/api/top", topCakeRoute);
+app.use("/api/sales", saleRoute);
+app.use("/api/affiliate", affiliateRoute);
 
 app.listen(PORT, () => {
   console.log(`Listening to port ${PORT}`);
