@@ -3,6 +3,7 @@ import { StoreContext } from "../../context/StoreContext";
 import "./placeOrder.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const PlaceOrder = () => {
   const { getTotalCartAmount, token, cartItemDetails, cartItems } =
@@ -28,7 +29,7 @@ const PlaceOrder = () => {
     });
   };
 
-  // Place order
+  // Online payment
   const handleSubmit = async (e) => {
     e.preventDefault();
     let orderItems = [];
@@ -55,6 +56,51 @@ const PlaceOrder = () => {
       window.location.href = res.data.checkoutUrl;
     } else {
       alert("Error");
+    }
+  };
+
+  // Cash On Delivery (COD)
+  const handleCOD = async (e) => {
+    e.preventDefault();
+    let orderItems = [];
+
+    cartItemDetails.map((item) => {
+      if (cartItems[item._id] > 0) {
+        let itemInfo = item;
+        itemInfo["quantity"] = cartItems[item._id];
+        orderItems.push(itemInfo);
+      }
+    });
+
+    const orderData = {
+      address: formData,
+      items: orderItems,
+      amount: getTotalCartAmount() + 36,
+    };
+    try {
+      const res = await axios.post(
+        "http://localhost:3000/api/order/COD",
+        orderData,
+        {
+          headers: { token },
+        }
+      );
+
+      if (res.status === 200) {
+        toast.success("Order Processing.");
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          street: "",
+          city: "",
+          barangay: "",
+          zipcode: "",
+          contact: "",
+        });
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -164,7 +210,10 @@ const PlaceOrder = () => {
               </p>
             </div>
           </div>
-          <button>PROCEED TO PAYMENT</button>
+          <button type="submit">PROCEED TO PAYMENT</button>
+          <button type="button" onClick={handleCOD}>
+            Cash On Delivery (COD)
+          </button>
         </div>
       </div>
     </form>

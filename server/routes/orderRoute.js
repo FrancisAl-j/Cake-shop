@@ -7,6 +7,7 @@ const router = express.Router();
 router.post("/place", authMiddleware, controller.placeOrder);
 router.post("/verify", authMiddleware, controller.verifyOrder);
 router.get("/userorders", authMiddleware, controller.userOrder);
+router.post("/COD", authMiddleware, controller.orderCOD);
 
 // Admin side
 router.get("/list", controller.fetchUserOrders);

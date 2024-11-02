@@ -279,6 +279,26 @@ const allOrders = async (req, res) => {
   }
 };
 
+// Order Cash On Deliver "COD"
+const orderCOD = async (req, res) => {
+  const { items, amount, address } = req.body;
+  try {
+    const newOrder = new Order({
+      userId: req.body.userId,
+      items,
+      amount,
+      address,
+      paymentMethod: "Cash on delivery",
+    });
+
+    await newOrder.save();
+
+    res.status(200).json(newOrder);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 export default {
   placeOrder,
   verifyOrder,
@@ -287,4 +307,5 @@ export default {
   updateStatus,
   cancelOrder,
   allOrders,
+  orderCOD,
 };
