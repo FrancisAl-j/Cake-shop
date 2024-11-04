@@ -71,4 +71,15 @@ const affiliateSignin = async (req, res) => {
   }
 };
 
-export default { affiliateSignUp, affiliateSignin };
+// Fetching workers/employee
+const getAffiliate = async (req, res) => {
+  try {
+    const affiliate = await Admin.find();
+
+    res.status(200).json(affiliate);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export default { affiliateSignUp, affiliateSignin, getAffiliate };

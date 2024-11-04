@@ -10,21 +10,24 @@ import Signin from "./pages/authentication/Signin";
 // Necessary for toastifying messages
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useState } from "react";
 
 const App = () => {
+  const [token, setToken] = useState(null || localStorage.getItem("token"));
+  const [user, setUser] = useState({});
   return (
     <div className="main">
       <ToastContainer />
-      <Navbar />
+      <Navbar token={token} setToken={setToken} />
       <hr />
       <div className="app-content">
-        <Sidebar />
+        <Sidebar token={token} />
         <Routes>
           <Route path="/add" element={<Add />} />
           <Route path="/list" element={<List />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/" element={<Signin />} />
+          <Route path="/" element={<Signin setToken={setToken} />} />
         </Routes>
       </div>
     </div>

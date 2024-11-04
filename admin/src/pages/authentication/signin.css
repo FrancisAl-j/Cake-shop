@@ -10,6 +10,7 @@
   display: grid;
   place-items: center;
   width: 100%;
+  height: 100svh;
 }
 .form-wrapper form {
   width: min(100% - 20px, 400px);
@@ -48,4 +49,8 @@ select {
 .form-wrapper form button:hover {
   background: var(--light-brown);
   color: var(--nav-text);
+}
+.error {
+  color: #fff;
+  background: #ff000090;
 }

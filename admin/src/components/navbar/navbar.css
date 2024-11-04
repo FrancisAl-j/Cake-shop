@@ -21,3 +21,10 @@
   width: 40px;
   aspect-ratio: 1/1;
 }
+.navbar button {
+  padding: 5px 15px;
+  cursor: pointer;
+  background: var(--nav-text);
+  font-size: 1rem;
+  border-radius: 20px;
+}
