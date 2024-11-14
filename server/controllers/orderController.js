@@ -291,6 +291,8 @@ const orderCOD = async (req, res) => {
       paymentMethod: "Cash on delivery",
     });
 
+    await User.findByIdAndUpdate(req.body.userId, { cartData: {} });
+
     await newOrder.save();
 
     res.status(200).json(newOrder);

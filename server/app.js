@@ -14,6 +14,7 @@ import orderRoute from "./routes/orderRoute.js";
 import topCakeRoute from "./routes/topCakeRoute.js";
 import saleRoute from "./routes/saleRoute.js";
 import affiliateRoute from "./routes/affiliateRoute.js";
+import salesRoute from "./routes/saleRoute.js";
 
 const app = express();
 
@@ -36,8 +37,15 @@ app.use("/api/order", orderRoute);
 app.use("/api/top", topCakeRoute);
 app.use("/api/sales", saleRoute);
 app.use("/api/affiliate", affiliateRoute);
+app.use("/api/sales", salesRoute);
 
 app.listen(PORT, () => {
   console.log(`Listening to port ${PORT}`);
   connectDB();
 });
+
+const date = 7;
+const today = new Date();
+today.setDate(today.getDate() + date);
+
+console.log(today);

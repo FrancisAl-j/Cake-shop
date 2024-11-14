@@ -11,6 +11,7 @@ const Navbar = ({ token, setToken }) => {
     localStorage.removeItem("token");
     navigate("/");
   };
+
   return (
     <nav className="navbar">
       <h1 className="logo">Admin Panel</h1>
