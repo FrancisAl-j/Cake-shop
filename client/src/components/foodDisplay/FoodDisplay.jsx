@@ -6,8 +6,21 @@ import ReactPaginate from "react-paginate";
 import axios from "axios";
 
 const FoodDisplay = ({ category }) => {
-  const { food_list, pageCount, handlePageClick, query, setQuery } =
+  const { food_list, pageCount, handlePageClick, query, setQuery, sales } =
     useContext(StoreContext);
+
+  const [cakeId, setCakeId] = useState([]);
+
+  /*useEffect(() => {
+    sales.map((sale) => {
+      sale.products.map((cake) => {
+        //console.log(cake);
+        setCakeId([...cakeId, cake]);
+      });
+    });
+  }, []);
+
+  console.log("Cake ID: " + cakeId); */
 
   return (
     <div className="food-display" id="food-display">
@@ -21,14 +34,27 @@ const FoodDisplay = ({ category }) => {
       <div className="food-display-list">
         {food_list.map((item, index) => {
           if (category === "All" || category === item.category) {
+            const matchingSales = sales?.find((sale) =>
+              sale.products?.includes(item._id)
+            );
+
+            const salePrice =
+              matchingSales && matchingSales.saleRate
+                ? item.price - item.price * matchingSales.saleRate
+                : item.price;
+
+            const rate = matchingSales && matchingSales.saleRate;
+
             return (
               <FoodItem
                 key={index}
                 id={item._id}
                 name={item.name}
                 description={item.description}
-                price={item.price}
+                price={salePrice}
                 image={item.image}
+                saleImage={matchingSales ? "image" : ""}
+                rate={rate}
               />
             );
           }

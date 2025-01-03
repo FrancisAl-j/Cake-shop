@@ -16,6 +16,8 @@ import saleRoute from "./routes/saleRoute.js";
 import affiliateRoute from "./routes/affiliateRoute.js";
 import salesRoute from "./routes/saleRoute.js";
 
+import { checkDate } from "./checkDate.js";
+
 const app = express();
 
 const PORT = 3000;
@@ -44,7 +46,9 @@ app.listen(PORT, () => {
   connectDB();
 });
 
-const date = 7;
+checkDate();
+
+const date = 5;
 const today = new Date();
 today.setDate(today.getDate() + date);
 

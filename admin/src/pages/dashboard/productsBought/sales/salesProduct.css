@@ -1,0 +1,17 @@
+:root {
+  --warm-green: #36ba98;
+  --warm-yellow: #e9c46a;
+  --warm-orange: #f4a261;
+  --warm-red: #e76f51;
+}
+.sales-list {
+  width: 100%;
+  padding: 5px 10px;
+}
+.sales-list button {
+  padding: 6px 10px;
+  cursor: pointer;
+  margin: 10px;
+  background: var(--warm-green);
+  color: #fff;
+}

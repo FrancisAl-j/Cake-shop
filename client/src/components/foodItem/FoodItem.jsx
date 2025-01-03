@@ -7,12 +7,28 @@ import MinusRed from "../../assets/minus-red.png";
 import { useContext, useState } from "react";
 import { StoreContext } from "../../context/StoreContext";
 
-const FoodItem = ({ id, name, price, description, image }) => {
+const FoodItem = ({ id, name, price, description, image, salePrice, rate }) => {
   const { cartItems, addToCart, removeFromCart } = useContext(StoreContext);
+  console.log(salePrice);
 
   return (
     <div className="food-item" key={id}>
       <div className="food-item-img-container">
+        {rate && (
+          <div className="sale-container">
+            <p className="sale">Sale!!!</p>
+            {rate === 0.3 ? (
+              <p className="percent">30%</p>
+            ) : rate === 0.5 ? (
+              <p className="percent">50%</p>
+            ) : rate === 0.7 ? (
+              <p className="percent">70%</p>
+            ) : (
+              <></>
+            )}
+          </div>
+        )}
+
         <img
           className="food-item-image"
           src={`http://localhost:3000/images/${image}`}

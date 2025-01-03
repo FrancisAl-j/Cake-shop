@@ -80,5 +80,20 @@ const createSale = async (req, res) => {
 };
 
 // Client side (Fetching)
+const getAllSales = async (req, res) => {
+  try {
+    const sales = await Sale.find();
 
-export default { addSaleCakes, removeSaleCakes, fetchSaleCakes, createSale };
+    res.status(200).json(sales);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export default {
+  addSaleCakes,
+  removeSaleCakes,
+  fetchSaleCakes,
+  createSale,
+  getAllSales,
+};

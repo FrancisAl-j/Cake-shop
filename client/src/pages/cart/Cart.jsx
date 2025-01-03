@@ -11,6 +11,7 @@ const Cart = () => {
     removeFromCart,
     getTotalCartAmount,
     cartItemDetails,
+    sales,
   } = useContext(StoreContext);
 
   return (
@@ -29,6 +30,15 @@ const Cart = () => {
         {cartItemDetails && food_list.length > 0 ? (
           cartItemDetails.map((item, index) => {
             if (cartItems[item._id] > 0 && item) {
+              const matchingSales = sales?.find((sale) =>
+                sale.products?.includes(item._id)
+              );
+
+              const salePrice =
+                matchingSales && matchingSales.saleRate
+                  ? item.price - item.price * matchingSales.saleRate
+                  : item.price;
+
               // Check if item exists
               return (
                 <div key={index}>
@@ -38,9 +48,9 @@ const Cart = () => {
                       alt=""
                     />
                     <p>{item.name}</p>
-                    <p>₱ {item.price}</p>
+                    <p>₱ {salePrice}</p>
                     <p>{cartItems[item._id]}</p>
-                    <p>{item.price * cartItems[item._id]}</p>
+                    <p>{salePrice * cartItems[item._id]}</p>
                     <p
                       onClick={() => removeFromCart(item._id)}
                       className="cross"

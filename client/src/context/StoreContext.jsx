@@ -11,6 +11,7 @@ const StoreContextProvider = (props) => {
   const [pageCount, setPageCount] = useState(1);
   const [limit, setLimit] = useState(10);
   const [query, setQuery] = useState("");
+  const [sales, setSales] = useState([]);
   const currentPage = useRef();
 
   const addToCart = async (itemId) => {
@@ -55,18 +56,26 @@ const StoreContextProvider = (props) => {
       if (cartItems[item] > 0) {
         let foodInfo = food_list.find((product) => product._id === item);
         if (foodInfo) {
-          totalAmount += foodInfo.price * cartItems[item];
+          //totalAmount += foodInfo.price * cartItems[item];
+          const sale = sales.find((saleItem) =>
+            saleItem.products.includes(item)
+          );
+          const saleRate = sale ? sale.saleRate : 1; // Use saleRate if on sale, otherwise 1 (no discount)
+          totalAmount += foodInfo.price * cartItems[item] * saleRate;
         }
       }
     }
     return totalAmount;
   };
 
+  console.log(sales);
+
   useEffect(() => {
     currentPage.current = 1;
     const loadData = async () => {
       await paginatedFood();
       await fetchFood();
+      await fetchSaleCakes();
       if (localStorage.getItem("token")) {
         setToken(localStorage.getItem("token"));
         await fetchCartItems(localStorage.getItem("token"));
@@ -80,6 +89,8 @@ const StoreContextProvider = (props) => {
     currentPage.current = e.selected + 1;
     await paginatedFood();
   };
+
+  console.log(sales);
 
   const paginatedFood = async () => {
     try {
@@ -126,6 +137,18 @@ const StoreContextProvider = (props) => {
     }
   };
 
+  const fetchSaleCakes = async () => {
+    try {
+      const res = await axios.get("http://localhost:3000/api/sales/all");
+
+      if (res.status === 200) {
+        setSales(res.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const contextValue = {
     food_list,
     cartItems,
@@ -140,6 +163,7 @@ const StoreContextProvider = (props) => {
     query,
     setQuery,
     cartItemDetails,
+    sales,
   };
 
   return (

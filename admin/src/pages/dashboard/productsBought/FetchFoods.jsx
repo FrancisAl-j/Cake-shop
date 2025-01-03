@@ -78,20 +78,12 @@ const FetchFoods = ({ token }) => {
                 <button onClick={() => handleAddSales(food._id)}>
                   Sale Item
                 </button>
+
                 <p>{food.buys}</p>
               </div>
             );
           })}
       </div>
-
-      <section className="sales-container">
-        <SalesProducts
-          fetchSaleCakes={fetchSaleCakes}
-          saleCakes={saleCakes}
-          foods={foods}
-          token={token}
-        />
-      </section>
     </>
   );
 };

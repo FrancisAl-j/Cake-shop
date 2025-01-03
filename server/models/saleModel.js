@@ -4,7 +4,7 @@ const saleSchema = new mongoose.Schema({
   products: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "foodModel",
+      ref: "Food",
     },
   ],
   date: {

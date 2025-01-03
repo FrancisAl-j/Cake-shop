@@ -6,6 +6,7 @@ import List from "./pages/list/List";
 import Orders from "./pages/orders/Orders";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Signin from "./pages/authentication/Signin";
+import SalesProducts from "./pages/dashboard/productsBought/sales/SalesProducts";
 
 // Necessary for toastifying messages
 import { ToastContainer } from "react-toastify";
@@ -28,6 +29,7 @@ const App = () => {
           <Route path="/orders" element={<Orders />} />
           <Route path="/dashboard" element={<Dashboard token={token} />} />
           <Route path="/" element={<Signin setToken={setToken} />} />
+          <Route path="/sales" element={<SalesProducts token={token} />} />
         </Routes>
       </div>
     </div>

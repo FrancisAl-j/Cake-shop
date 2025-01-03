@@ -9,4 +9,6 @@ router.post("/remove", authMiddleware, controller.removeSaleCakes);
 router.get("/get", authMiddleware, controller.fetchSaleCakes);
 router.post("/create", authMiddleware, controller.createSale);
 
+router.get("/all", controller.getAllSales);
+
 export default router;

@@ -24,3 +24,10 @@
   border-bottom: #000 1px solid;
   padding: 10px 0;
 }
+.food-container button {
+  background: var(--warm-green);
+  padding: 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  color: #fff;
+}

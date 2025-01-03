@@ -2,11 +2,41 @@ import React, { useEffect, useState } from "react";
 import "./salesProduct.css";
 import axios from "axios";
 
-const SalesProducts = ({ saleCakes, foods, token }) => {
-  console.log(saleCakes);
+const SalesProducts = ({ token }) => {
   const [products, setProducts] = useState([]);
   const [date, setDate] = useState(3);
   const [saleRate, setSaleRate] = useState(0.7);
+  const [foods, setFoods] = useState([]);
+  const [saleCakes, setSaleCakes] = useState({});
+
+  useEffect(() => {
+    fetchProductsBuys();
+    fetchSaleCakes();
+  }, []);
+
+  const fetchProductsBuys = async () => {
+    try {
+      const res = await axios.get("http://localhost:3000/api/food/list");
+      if (res.status === 200) {
+        setFoods(res.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchSaleCakes = async () => {
+    try {
+      const res = await axios.get("http://localhost:3000/api/sales/get", {
+        headers: { token },
+      });
+      if (res.status === 200) {
+        setSaleCakes(res.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     const productIds = foods.reduce((acc, food) => {
@@ -51,15 +81,28 @@ const SalesProducts = ({ saleCakes, foods, token }) => {
   console.log(date);
 
   return (
-    <section className="sales-list">
+    <div className="sales-list">
+      <h1>Cakes to put on sale</h1>
+      <div className="title-container">
+        <h2>Cakes</h2>
+        <h2>Name</h2>
+        <h2>Price</h2>
+        <h2>Bought</h2>
+      </div>
       {saleCakes && foods.length > 0 && (
         <div>
           {foods &&
             foods.map((food, index) => {
               if (saleCakes[food._id]) {
                 return (
-                  <div key={index}>
+                  <div className="food-container" key={index}>
+                    <img
+                      src={`http://localhost:3000/images/${food.image}`}
+                      alt=""
+                    />
                     <p>{food.name}</p>
+                    <p>₱ {food.price}</p>
+                    <p>{food.buys}</p>
                   </div>
                 );
               }
@@ -80,7 +123,7 @@ const SalesProducts = ({ saleCakes, foods, token }) => {
       </select>
 
       <button onClick={handleSales}>Put To Sale</button>
-    </section>
+    </div>
   );
 };
 
