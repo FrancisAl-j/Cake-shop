@@ -90,10 +90,22 @@ const getAllSales = async (req, res) => {
   }
 };
 
+const deleteSale = async (req, res) => {
+  const { id } = req.params;
+  try {
+    await Sale.findByIdAndDelete(id);
+
+    res.status(200).json({ message: "Successfully deleted." });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 export default {
   addSaleCakes,
   removeSaleCakes,
   fetchSaleCakes,
   createSale,
   getAllSales,
+  deleteSale,
 };

@@ -11,4 +11,6 @@ router.post("/create", authMiddleware, controller.createSale);
 
 router.get("/all", controller.getAllSales);
 
+router.delete("/delete/:id", controller.deleteSale);
+
 export default router;
