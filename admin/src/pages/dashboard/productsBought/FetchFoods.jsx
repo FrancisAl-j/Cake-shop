@@ -15,7 +15,7 @@ const FetchFoods = ({ token }) => {
 
   const fetchProductsBuys = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/food/list");
+      const res = await axios.get("https://cake-shop-backend-klrk.onrender.com/api/food/list");
       if (res.status === 200) {
         setFoods(res.data);
       }
@@ -26,7 +26,7 @@ const FetchFoods = ({ token }) => {
 
   const fetchSaleCakes = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/sales/get", {
+      const res = await axios.get("https://cake-shop-backend-klrk.onrender.com/api/sales/get", {
         headers: { token },
       });
       if (res.status === 200) {
@@ -41,7 +41,7 @@ const FetchFoods = ({ token }) => {
     //e.preventDefault();
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/sales/add",
+        "https://cake-shop-backend-klrk.onrender.com/api/sales/add",
         { itemId },
         {
           headers: { token },
@@ -71,7 +71,7 @@ const FetchFoods = ({ token }) => {
             return (
               <div className="food-container" key={index}>
                 <img
-                  src={`http://localhost:3000/images/${food.image}`}
+                  src={`https://cake-shop-backend-klrk.onrender.com/images/${food.image}`}
                   alt=""
                 />
                 <p>{food.name}</p>
