@@ -53,7 +53,7 @@ const PlaceOrder = () => {
     };
 
     const res = await axios.post(
-      `http://localhost:3000/api/order/place`,
+      `https://cake-shop-backend-klrk.onrender.com/api/order/place`,
       orderData,
       { headers: { token } }
     );
@@ -84,7 +84,7 @@ const PlaceOrder = () => {
     };
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/order/COD",
+        "https://cake-shop-backend-klrk.onrender.com/api/order/COD",
         orderData,
         {
           headers: { token },
