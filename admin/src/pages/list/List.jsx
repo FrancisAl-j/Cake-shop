@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./list.css";
 import axios from "axios";
-import { toast } from "react-toastify";
+
 import UpdateCake from "../../components/popup/UpdateCake";
 
 const List = () => {
@@ -29,7 +29,6 @@ const List = () => {
         );
         await fetchFood();
         if (res.status === 200) {
-          toast.success("Product successfuly deleted");
         }
       }
     } catch (error) {

@@ -3,7 +3,6 @@ import { StoreContext } from "../../context/StoreContext";
 import "./placeOrder.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 
 const PlaceOrder = () => {
   const {
@@ -93,7 +92,6 @@ const PlaceOrder = () => {
 
       if (res.status === 200) {
         await fetchCartItems();
-        toast.success("Order Processing.");
         navigate("/myorders");
 
         window.location.reload();

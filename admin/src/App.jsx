@@ -9,8 +9,6 @@ import Signin from "./pages/authentication/Signin";
 import SalesProducts from "./pages/dashboard/productsBought/sales/SalesProducts";
 
 // Necessary for toastifying messages
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 
 const App = () => {
@@ -18,7 +16,6 @@ const App = () => {
   const [user, setUser] = useState({});
   return (
     <div className="main">
-      <ToastContainer />
       <Navbar token={token} setToken={setToken} />
       <hr />
       <div className="app-content">

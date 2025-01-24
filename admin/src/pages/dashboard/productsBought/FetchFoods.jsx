@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./fetchFoods.css";
 import axios from "axios";
-import { toast } from "react-toastify";
 import SalesProducts from "./sales/SalesProducts";
 
 const FetchFoods = ({ token }) => {
@@ -49,7 +48,6 @@ const FetchFoods = ({ token }) => {
       );
 
       if (res.status === 200) {
-        toast.success("Added to sales.");
         await fetchSaleCakes();
       }
     } catch (error) {

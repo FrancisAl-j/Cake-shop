@@ -3,7 +3,6 @@ import "./myOrder.css";
 import { StoreContext } from "../../context/StoreContext";
 import axios from "axios";
 import Parcel from "../../assets/parcel.svg";
-import { toast } from "react-toastify";
 
 const MyOrders = () => {
   const { token } = useContext(StoreContext);
@@ -39,7 +38,6 @@ const MyOrders = () => {
 
         if (res.status === 200) {
           await fetchOrders();
-          toast.success("Order cancelled.");
         }
       }
     } catch (error) {

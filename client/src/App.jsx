@@ -10,9 +10,6 @@ import MyOrders from "./pages/myOrder/MyOrders";
 import VerifyEmail from "./pages/verify/VerifyEmail";
 import { useState } from "react";
 
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
 const App = () => {
   const [showLogin, setShowLogin] = useState(false);
 
@@ -21,7 +18,7 @@ const App = () => {
       <main>
         {showLogin ? <LoginPopUp setShowLogin={setShowLogin} /> : <></>}
         <Nav setShowLogin={setShowLogin} />
-        <ToastContainer />
+
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/cart" element={<Cart />} />

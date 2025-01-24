@@ -3,7 +3,6 @@ import "./loginPopUp.css";
 import Cross from "../../assets/cross.svg";
 import axios from "axios";
 import { StoreContext } from "../../context/StoreContext";
-import { toast } from "react-toastify";
 
 const LoginPopUp = ({ setShowLogin }) => {
   const { setToken } = useContext(StoreContext);
@@ -36,7 +35,6 @@ const LoginPopUp = ({ setShowLogin }) => {
 
     if (currState === "Sign Up") {
       if (res.status === 200) {
-        toast.success("Email confirmation has been sent");
       }
     }
 
@@ -46,7 +44,7 @@ const LoginPopUp = ({ setShowLogin }) => {
         localStorage.setItem("token", res.data.token);
         setShowLogin(false);
       } else {
-        toast.error("Please Activate your email first");
+        console.log(error);
       }
     }
 
