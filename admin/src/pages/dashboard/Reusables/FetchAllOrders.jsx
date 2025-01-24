@@ -12,7 +12,7 @@ const FetchAllOrders = () => {
 
   const fetchAllOrders = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/order/all-orders");
+      const res = await axios.get("https://cake-shop-backend-klrk.onrender.com/api/order/all-orders");
       if (res.status === 200) {
         setOrders(res.data);
       }
