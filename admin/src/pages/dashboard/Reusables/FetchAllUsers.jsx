@@ -11,7 +11,7 @@ const FetchAllUsers = () => {
 
   const fetchAllUsers = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/user/users");
+      const res = await axios.get("https://cake-shop-backend-klrk.onrender.com/api/user/users");
       if (res.status === 200) {
         setUsers(res.data);
       }
