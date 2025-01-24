@@ -24,7 +24,7 @@ const Nav = ({ setShowLogin }) => {
   return (
     <header>
       <nav>
-        <h1>Cake Shop</h1>
+        <h1>Clanginess</h1>
 
         <ul>
           <Link to="/">
