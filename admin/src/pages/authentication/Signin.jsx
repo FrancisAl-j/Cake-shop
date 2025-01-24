@@ -102,7 +102,7 @@ const Signin = ({ token, setToken }) => {
               </select>
             )}
           </section>
-          <button>{formState === "sigin" ? "Sign in" : "Sign up"}</button>
+          <button>{formState === "signin" ? "Sign in" : "Sign up"}</button>
           {formState === "signin" ? (
             <p>
               Don't have an account?{" "}

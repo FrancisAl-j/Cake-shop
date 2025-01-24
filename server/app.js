@@ -26,7 +26,19 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://cake-shop-dgvz.onrender.com", // Allow your frontend origin
+    origin: (origin, callback) => {
+      const allowedOrigins = [
+        "https://cake-shop-dgvz.onrender.com",
+        "https://cake-shop-admin-41ty.onrender.com",
+      ];
+
+      // Allow requests with no origin (like Postman or server-to-server calls)
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
   })
 );
 
