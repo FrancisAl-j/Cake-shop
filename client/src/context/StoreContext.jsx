@@ -26,7 +26,7 @@ const StoreContextProvider = (props) => {
 
     if (token) {
       await axios.post(
-        "http://localhost:3000/api/cart/add",
+        "https://cake-shop-backend-klrk.onrender.com/add",
         { itemId },
         { headers: { token } }
       );
@@ -41,7 +41,7 @@ const StoreContextProvider = (props) => {
 
     if (token) {
       await axios.post(
-        "http://localhost:3000/api/cart/remove",
+        "https://cake-shop-backend-klrk.onrender.com/api/cart/remove",
         { itemId },
         { headers: { token } }
       );
@@ -91,7 +91,7 @@ const StoreContextProvider = (props) => {
   const paginatedFood = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:3000/api/food/paginate/foods?page=${currentPage.current}&limit=${limit}`,
+        `https://cake-shop-backend-klrk.onrender.com/api/food/paginate/foods?page=${currentPage.current}&limit=${limit}`,
         {
           params: { query },
         }
@@ -107,7 +107,7 @@ const StoreContextProvider = (props) => {
 
   const fetchFood = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/food/list");
+      const res = await axios.get("https://cake-shop-backend-klrk.onrender.com/api/food/list");
       if (res.status === 200) {
         setCartItemDetails(res.data);
       }
@@ -119,7 +119,7 @@ const StoreContextProvider = (props) => {
   const fetchCartItems = async (token) => {
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/cart/get",
+        "https://cake-shop-backend-klrk.onrender.com/api/cart/get",
         {},
         {
           headers: { token },
@@ -135,7 +135,7 @@ const StoreContextProvider = (props) => {
 
   const fetchSaleCakes = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/sales/all");
+      const res = await axios.get("https://cake-shop-backend-klrk.onrender.com/api/sales/all");
 
       if (res.status === 200) {
         setSales(res.data);
