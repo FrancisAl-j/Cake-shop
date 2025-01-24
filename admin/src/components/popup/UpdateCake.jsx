@@ -45,7 +45,7 @@ const UpdateCake = ({
     }
     try {
       const res = await axios.put(
-        `http://localhost:3000/api/food/update/${id}`,
+        `https://cake-shop-backend-klrk.onrender.com/api/food/update/${id}`,
         updatedFormData
       );
       if (res.status === 200) {
@@ -84,7 +84,7 @@ const UpdateCake = ({
             src={
               productImage instanceof File
                 ? URL.createObjectURL(productImage)
-                : `http://localhost:3000/images/${formData.image}`
+                : `https://cake-shop-backend-klrk.onrender.com/images/${formData.image}`
             }
             alt=""
             onClick={() => fileRef.current.click()}
