@@ -33,7 +33,7 @@ const Add = () => {
     Data.append("category", formData.category);
     Data.append("image", image);
     try {
-      const res = await axios.post("http://localhost:3000/api/food/add", Data);
+      const res = await axios.post("https://cake-shop-backend-klrk.onrender.com/api/food/add", Data);
       if (res.status === 200) {
         setFormData({
           name: "",
