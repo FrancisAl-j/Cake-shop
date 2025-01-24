@@ -24,7 +24,6 @@ const MyOrders = () => {
 
       if (res.status === 200) {
         setData(res.data);
-        console.log(res.data);
       }
     } catch (error) {
       console.log(error);

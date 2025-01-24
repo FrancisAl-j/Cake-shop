@@ -5,9 +5,7 @@
   --tan: #9c634f;
   --light-brown: #c37960;
 }
-* {
-  outline: 1px red dotted;
-}
+
 .food-item {
   width: 100%;
   margin: auto;

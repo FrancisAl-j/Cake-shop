@@ -36,20 +36,14 @@ const Nav = ({ setShowLogin }) => {
             </li>
           </Link>
 
-          <li
-            onClick={() => setMenu("About")}
-            className={menu === "About" ? "active" : ""}
-          >
-            About
-          </li>
-          <Link to="/">
+          <a href="#explore-menu">
             <li
               onClick={() => setMenu("Menu")}
               className={menu === "Menu" ? "active" : ""}
             >
               Menu
             </li>
-          </Link>
+          </a>
 
           <a href="#footer">
             <li

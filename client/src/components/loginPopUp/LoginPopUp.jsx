@@ -34,9 +34,6 @@ const LoginPopUp = ({ setShowLogin }) => {
 
     const res = await axios.post(url, formData);
 
-    console.log(res.data.active);
-    console.log(res.data);
-
     if (currState === "Sign Up") {
       if (res.status === 200) {
         toast.success("Email confirmation has been sent");

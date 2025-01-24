@@ -22,7 +22,7 @@ const NewProduct = () => {
 
   return (
     <div className="new-container">
-      <h1>New Products</h1>
+      {data.length !== 0 && <h1>New Products</h1>}
 
       <div className="item-wrapper">
         {data.map((item, index) => {

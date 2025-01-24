@@ -28,3 +28,16 @@
   font-size: 1rem;
   border-radius: 20px;
 }
+.img-navbar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+.img-navbar .navbar-logout {
+  background: var(--dark-brown);
+}
+.img-navbar .navbar-logout span {
+  cursor: pointer;
+  color: red;
+}

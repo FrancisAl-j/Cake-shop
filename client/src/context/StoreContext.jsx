@@ -68,8 +68,6 @@ const StoreContextProvider = (props) => {
     return totalAmount;
   };
 
-  console.log(sales);
-
   useEffect(() => {
     currentPage.current = 1;
     const loadData = async () => {
@@ -89,8 +87,6 @@ const StoreContextProvider = (props) => {
     currentPage.current = e.selected + 1;
     await paginatedFood();
   };
-
-  console.log(sales);
 
   const paginatedFood = async () => {
     try {
@@ -164,6 +160,7 @@ const StoreContextProvider = (props) => {
     setQuery,
     cartItemDetails,
     sales,
+    fetchCartItems,
   };
 
   return (

@@ -6,8 +6,13 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const PlaceOrder = () => {
-  const { getTotalCartAmount, token, cartItemDetails, cartItems } =
-    useContext(StoreContext);
+  const {
+    getTotalCartAmount,
+    token,
+    cartItemDetails,
+    cartItems,
+    fetchCartItems,
+  } = useContext(StoreContext);
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -87,17 +92,11 @@ const PlaceOrder = () => {
       );
 
       if (res.status === 200) {
+        await fetchCartItems();
         toast.success("Order Processing.");
-        setFormData({
-          firstName: "",
-          lastName: "",
-          email: "",
-          street: "",
-          city: "",
-          barangay: "",
-          zipcode: "",
-          contact: "",
-        });
+        navigate("/myorders");
+
+        window.location.reload();
       }
     } catch (error) {
       console.log(error);
@@ -115,7 +114,7 @@ const PlaceOrder = () => {
   }, [token]);
 
   return (
-    <form onSubmit={handleSubmit} className="place-order">
+    <form className="place-order">
       <div className="place-order-left">
         <p className="title">Delivery Information</p>
         <div className="multi-field">
@@ -206,11 +205,11 @@ const PlaceOrder = () => {
             <div className="cart-total-details">
               <b>Total</b>
               <p>
-                ₱ {getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 2}
+                ₱ {getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 36}
               </p>
             </div>
           </div>
-          <button type="submit">PROCEED TO PAYMENT</button>
+          {/* <button type="submit">PROCEED TO PAYMENT</button> */}
           <button type="button" onClick={handleCOD}>
             Cash On Delivery (COD)
           </button>

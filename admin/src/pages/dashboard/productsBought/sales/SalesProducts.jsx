@@ -64,6 +64,8 @@ const SalesProducts = ({ token }) => {
 
       if (res.status === 200) {
         setProducts([]);
+        await fetchSaleCakes();
+        await fetchProductsBuys();
       }
     } catch (error) {
       console.log(error);

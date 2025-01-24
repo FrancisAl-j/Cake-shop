@@ -3,7 +3,7 @@ import "./signin.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const Signin = ({ setToken }) => {
+const Signin = ({ token, setToken }) => {
   const navigate = useNavigate();
   const [formState, setFormState] = useState("signin");
   const [formData, setFormData] = useState({
@@ -48,70 +48,76 @@ const Signin = ({ setToken }) => {
 
   return (
     <div className="form-wrapper">
-      <form onSubmit={handleAuthentication}>
-        <header>
-          {formState === "signin" ? <h3>Sign in</h3> : <h3>Sign up</h3>}
-        </header>
+      {token ? (
+        <div>
+          <h1>Welcome to Admin Panel</h1>
+        </div>
+      ) : (
+        <form onSubmit={handleAuthentication}>
+          <header>
+            {formState === "signin" ? <h3>Sign in</h3> : <h3>Sign up</h3>}
+          </header>
 
-        <section className="form-elements">
-          {formState === "signin" ? (
-            <></>
-          ) : (
+          <section className="form-elements">
+            {formState === "signin" ? (
+              <></>
+            ) : (
+              <input
+                type="text"
+                name="name"
+                placeholder="Name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+            )}
+
             <input
-              type="text"
-              name="name"
-              placeholder="Name"
-              value={formData.name}
+              type="emaul"
+              name="email"
+              placeholder="Email"
+              value={formData.email}
               onChange={handleChange}
               required
             />
-          )}
-
-          <input
-            type="emaul"
-            name="email"
-            placeholder="Email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-          {formState === "signin" ? (
-            <></>
-          ) : (
-            <select
-              name="role"
-              value={formData.role}
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={formData.password}
               onChange={handleChange}
               required
-            >
-              <option value="Admin">Admin</option>
-              <option value="Employee">Employee</option>
-            </select>
+            />
+            {formState === "signin" ? (
+              <></>
+            ) : (
+              <select
+                name="role"
+                value={formData.role}
+                onChange={handleChange}
+                required
+              >
+                <option value="Admin">Admin</option>
+                <option value="Employee">Employee</option>
+              </select>
+            )}
+          </section>
+          <button>{formState === "sigin" ? "Sign in" : "Sign up"}</button>
+          {formState === "signin" ? (
+            <p>
+              Don't have an account?{" "}
+              <span onClick={() => setFormState("signup")}>Sign up here.</span>
+            </p>
+          ) : (
+            <p>
+              Already have an account?{" "}
+              <span onClick={() => setFormState("signin")}>Sign in here</span>
+            </p>
           )}
-        </section>
-        <button>{formState === "sigin" ? "Sign in" : "Sign up"}</button>
-        {formState === "signin" ? (
-          <p>
-            Don't have an account?{" "}
-            <span onClick={() => setFormState("signup")}>Sign up here.</span>
-          </p>
-        ) : (
-          <p>
-            Already have an account?{" "}
-            <span onClick={() => setFormState("signin")}>Sign in here</span>
-          </p>
-        )}
 
-        {error && <p className="error">{error}</p>}
-      </form>
+          {error && <p className="error">{error}</p>}
+        </form>
+      )}
     </div>
   );
 };
