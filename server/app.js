@@ -24,7 +24,11 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://cake-shop-dgvz.onrender.com", // Allow your frontend origin
+  })
+);
 
 app.get("/", (req, res) => {
   res.send("Hello world");
@@ -45,11 +49,3 @@ app.listen(PORT, () => {
   console.log(`Listening to port ${PORT}`);
   connectDB();
 });
-
-checkDate();
-
-const date = 5;
-const today = new Date();
-today.setDate(today.getDate() + date);
-
-console.log(today);
