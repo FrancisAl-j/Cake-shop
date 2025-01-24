@@ -13,7 +13,7 @@ const Orders = () => {
 
   const fetchAllOrders = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/order/list");
+      const res = await axios.get("https://cake-shop-backend-klrk.onrender.com/api/order/list");
       if (res.status === 200) {
         setData(res.data);
         console.log(res.data);
@@ -25,7 +25,7 @@ const Orders = () => {
 
   const handleUpdateStatus = async (e, orderId) => {
     try {
-      const res = await axios.put("http://localhost:3000/api/order/status", {
+      const res = await axios.put("https://cake-shop-backend-klrk.onrender.com/api/order/status", {
         orderId,
         status: e.target.value,
       });
