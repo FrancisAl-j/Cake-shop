@@ -11,7 +11,7 @@ const NewProduct = () => {
 
   const fetchNewFood = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/food/new");
+      const res = await axios.get("https://cake-shop-backend-klrk.onrender.com/api/food/new");
       if (res.status === 200) {
         setData(res.data);
       }
@@ -28,7 +28,7 @@ const NewProduct = () => {
         {data.map((item, index) => {
           return (
             <div className="item-container" key={index}>
-              <img src={`http://localhost:3000/images/${item.image}`} alt="" />
+              <img src={`https://cake-shop-backend-klrk.onrender.com/images/${item.image}`} alt="" />
               <p>{item.name}</p>
             </div>
           );
