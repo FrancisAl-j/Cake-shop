@@ -24,7 +24,7 @@ const Signin = ({ token, setToken }) => {
 
   const handleAuthentication = async (e) => {
     e.preventDefault();
-    const url = "http://localhost:3000/api/affiliate";
+    const url = "https://cake-shop-backend-klrk.onrender.com/api/affiliate";
 
     try {
       if (formState === "signin") {
