@@ -13,7 +13,7 @@ const List = () => {
 
   const fetchFood = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/food/list");
+      const res = await axios.get("https://cake-shop-backend-klrk.onrender.com/api/food/list");
       setFoods(res.data);
       console.log(res.data);
     } catch (error) {
@@ -25,7 +25,7 @@ const List = () => {
     try {
       if (window.confirm(`Are you sure you want to remove ${item}`)) {
         const res = await axios.delete(
-          `http://localhost:3000/api/food/delete/${id}`
+          `https://cake-shop-backend-klrk.onrender.com/api/food/delete/${id}`
         );
         await fetchFood();
         if (res.status === 200) {
@@ -56,7 +56,7 @@ const List = () => {
       {foods.map((food, index) => {
         return (
           <div key={index} className="list-table-format">
-            <img src={`http://localhost:3000/images/${food.image}`} alt="" />
+            <img src={`https://cake-shop-backend-klrk.onrender.com/images/${food.image}`} alt="" />
             <p>{food.name}</p>
             <p>{food.category}</p>
             <p>₱{food.price}</p>

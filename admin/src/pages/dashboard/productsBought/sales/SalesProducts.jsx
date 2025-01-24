@@ -16,7 +16,7 @@ const SalesProducts = ({ token }) => {
 
   const fetchAllSaleCakes = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/sales/all");
+      const res = await axios.get("https://cake-shop-backend-klrk.onrender.com/api/sales/all");
 
       if (res.status === 200) {
         setSales(res.data);
@@ -35,7 +35,7 @@ const SalesProducts = ({ token }) => {
 
   const fetchProductsBuys = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/food/list");
+      const res = await axios.get("https://cake-shop-backend-klrk.onrender.com/api/food/list");
       if (res.status === 200) {
         setFoods(res.data);
       }
@@ -46,7 +46,7 @@ const SalesProducts = ({ token }) => {
 
   const fetchSaleCakes = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/sales/get", {
+      const res = await axios.get("https://cake-shop-backend-klrk.onrender.com/api/sales/get", {
         headers: { token },
       });
       if (res.status === 200) {
@@ -70,7 +70,7 @@ const SalesProducts = ({ token }) => {
   const handleSales = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/sales/create",
+        "https://cake-shop-backend-klrk.onrender.com/api/sales/create",
         {
           products,
           date,
@@ -103,7 +103,7 @@ const SalesProducts = ({ token }) => {
     try {
       if (window.confirm("Are you sure you want to delete this sale?")) {
         const res = await axios.delete(
-          `http://localhost:3000/api/sales/delete/${id}`
+          `https://cake-shop-backend-klrk.onrender.com/api/sales/delete/${id}`
         );
 
         if (res.status === 200) {
@@ -131,7 +131,7 @@ const SalesProducts = ({ token }) => {
                   return (
                     <div className="food-container" key={index}>
                       <img
-                        src={`http://localhost:3000/images/${food.image}`}
+                        src={`https://cake-shop-backend-klrk.onrender.com/images/${food.image}`}
                         alt=""
                       />
                       <p>{food.name}</p>

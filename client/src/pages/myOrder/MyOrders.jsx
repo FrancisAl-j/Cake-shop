@@ -17,7 +17,7 @@ const MyOrders = () => {
   const fetchOrders = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:3000/api/order/userorders",
+        "https://cake-shop-backend-klrk.onrender.com/api/order/userorders",
         { headers: { token } }
       );
 
@@ -33,7 +33,7 @@ const MyOrders = () => {
     try {
       if (window.confirm("Are you sure you want to cancel this order?")) {
         const res = await axios.delete(
-          `http://localhost:3000/api/order/delete/${id}`
+          `https://cake-shop-backend-klrk.onrender.com/api/order/delete/${id}`
         );
 
         if (res.status === 200) {

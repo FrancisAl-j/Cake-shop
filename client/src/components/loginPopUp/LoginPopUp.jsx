@@ -26,9 +26,9 @@ const LoginPopUp = ({ setShowLogin }) => {
     e.preventDefault();
     let url;
     if (currState === "Sign Up") {
-      url = "http://localhost:3000/api/user/register";
+      url = "https://cake-shop-backend-klrk.onrender.com/api/user/register";
     } else {
-      url = "http://localhost:3000/api/user/login";
+      url = "https://cake-shop-backend-klrk.onrender.com/api/user/login";
     }
 
     const res = await axios.post(url, formData);

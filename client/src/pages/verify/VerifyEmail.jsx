@@ -16,7 +16,7 @@ const VerifyEmail = () => {
   const updateStatus = async () => {
     try {
       const res = await axios.put(
-        `http://localhost:3000/api/user/verify/${token}`
+        `https://cake-shop-backend-klrk.onrender.com/api/user/verify/${token}`
       );
       console.log(res.data);
     } catch (error) {
