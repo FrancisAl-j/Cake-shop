@@ -24,7 +24,9 @@ const Nav = ({ setShowLogin }) => {
   return (
     <header>
       <nav>
-        <h1>Clanginess</h1>
+        <Link to="/">
+          <h1>Clanginess</h1>
+        </Link>
 
         <ul>
           <Link to="/">
@@ -56,7 +58,6 @@ const Nav = ({ setShowLogin }) => {
         </ul>
 
         <div className="nav-right">
-          <img src={Search} alt="search" />
           <Link to="/cart">
             <div className="nav-search-icon">
               <img src={Basket} alt="basket" />
