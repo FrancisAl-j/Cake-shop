@@ -70,3 +70,6 @@
   color: skyblue;
   cursor: pointer;
 }
+.error {
+  color: red;
+}

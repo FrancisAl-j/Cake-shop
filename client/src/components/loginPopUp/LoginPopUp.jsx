@@ -3,8 +3,10 @@ import "./loginPopUp.css";
 import Cross from "../../assets/cross.svg";
 import axios from "axios";
 import { StoreContext } from "../../context/StoreContext";
+import { useNavigate } from "react-router-dom";
 
 const LoginPopUp = ({ setShowLogin }) => {
+  const navigate = useNavigate();
   const { setToken } = useContext(StoreContext);
   const [currState, setCurrState] = useState("Sign Up"); // current state
   const [formData, setFormData] = useState({
@@ -12,6 +14,7 @@ const LoginPopUp = ({ setShowLogin }) => {
     email: "",
     password: "",
   });
+  const [error, setError] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,36 +28,44 @@ const LoginPopUp = ({ setShowLogin }) => {
   const onLogin = async (e) => {
     e.preventDefault();
     let url;
-    if (currState === "Sign Up") {
-      url = "https://cake-shop-backend-klrk.onrender.com/api/user/register";
-    } else {
-      url = "https://cake-shop-backend-klrk.onrender.com/api/user/login";
-    }
-
-    const res = await axios.post(url, formData);
-
-    if (currState === "Sign Up") {
-      if (res.status === 200) {
+    try {
+      if (currState === "Sign Up") {
+        url = "https://cake-shop-backend-klrk.onrender.com/api/user/register";
+      } else {
+        url = "https://cake-shop-backend-klrk.onrender.com/api/user/login";
       }
-    }
 
-    if (currState === "Login") {
-      if (res.data.user.active === true) {
+      const res = await axios.post(url, formData);
+
+      if (currState === "Sign Up") {
+        if (res.status === 200) {
+          setCurrState("Login");
+        }
+      }
+
+      if (currState === "Login") {
+        if (res.data.user.active === true) {
+          setToken(res.data.token);
+          localStorage.setItem("token", res.data.token);
+          setShowLogin(false);
+        } else {
+          console.log(error);
+        }
+      }
+
+      /*if (res.status === 200) {
         setToken(res.data.token);
         localStorage.setItem("token", res.data.token);
         setShowLogin(false);
       } else {
-        console.log(error);
+        alert(res.data.message);
+      }*/
+    } catch (error) {
+      if (error.response && error.response.data) {
+        const { message } = error.response.data;
+        setError(message);
       }
     }
-
-    /*if (res.status === 200) {
-      setToken(res.data.token);
-      localStorage.setItem("token", res.data.token);
-      setShowLogin(false);
-    } else {
-      alert(res.data.message);
-    }*/
   };
   return (
     <div className="login-popup">
@@ -110,6 +121,7 @@ const LoginPopUp = ({ setShowLogin }) => {
             <span onClick={() => setCurrState("Login")}>Login here</span>
           </p>
         )}
+        {error && <p className="error">{error}</p>}
       </form>
     </div>
   );
