@@ -71,5 +71,7 @@
   cursor: pointer;
 }
 .error {
-  color: red;
+  width: 100%;
+  background: red;
+  color: #fff;
 }
