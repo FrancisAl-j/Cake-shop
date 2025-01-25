@@ -4,6 +4,10 @@ dotenv.config();
 import express from "express";
 
 import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Importing files
 import connectDB from "./config.js";
@@ -48,7 +52,7 @@ app.get("/", (req, res) => {
 
 // Endpoints
 app.use("/api/food", foodRoute);
-app.use("/images", express.static("uploads"));
+app.use("/images", express.static(path.join(__dirname, "../uploads")));
 app.use("/api/user", userRoute);
 app.use("/api/cart", cartRoute);
 app.use("/api/order", orderRoute);
