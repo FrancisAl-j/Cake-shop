@@ -26,7 +26,7 @@ const StoreContextProvider = (props) => {
 
     if (token) {
       await axios.post(
-        "https://cake-shop-backend-klrk.onrender.com/add",
+        "https://cake-shop-backend-klrk.onrender.com/api/cart/add",
         { itemId },
         { headers: { token } }
       );
