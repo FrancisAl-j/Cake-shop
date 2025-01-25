@@ -30,7 +30,7 @@ const FoodItem = ({ id, name, price, description, image, salePrice, rate }) => {
 
         <img
           className="food-item-image"
-          src={`http://localhost:3000/images/${image}`}
+          src={`https://cake-shop-backend-klrk.onrender.com/images/${image}`}
           alt=""
         />
         {!cartItems[id] ? (
