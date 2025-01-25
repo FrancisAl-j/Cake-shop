@@ -65,7 +65,7 @@ const registerUser = async (req, res) => {
       subject: "Account Activation",
       text: `Hello ${user.name}, Activate your account by clinic the provided link`, // Plain text fallback
       html: `Hello <strong>${user.name}</strong>,<br><br>Activate your account by clicking the link provided!<br><br>
-  <a href="http://localhost:5174/verify/email/${user.temporaryToken}">Click here to log in</a>`,
+  <a href="https://cake-shop-dgvz.onrender.com//verify/email/${user.temporaryToken}">Click here to log in</a>`,
     };
 
     transporter.sendMail(activateEmail, function (err, info) {
