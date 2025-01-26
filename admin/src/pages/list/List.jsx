@@ -13,7 +13,9 @@ const List = () => {
 
   const fetchFood = async () => {
     try {
-      const res = await axios.get("https://cake-shop-backend-klrk.onrender.com/api/food/list");
+      const res = await axios.get(
+        "https://cake-shop-backend-klrk.onrender.com/api/food/list"
+      );
       setFoods(res.data);
       console.log(res.data);
     } catch (error) {
@@ -56,7 +58,10 @@ const List = () => {
       {foods.map((food, index) => {
         return (
           <div key={index} className="list-table-format">
-            <img src={`https://cake-shop-backend-klrk.onrender.com/images/${food.image}`} alt="" />
+            <img
+              src={`https://cake-shop-backend-klrk.onrender.com/images/${food.image}`}
+              alt=""
+            />
             <p>{food.name}</p>
             <p>{food.category}</p>
             <p>₱{food.price}</p>

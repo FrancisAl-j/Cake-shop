@@ -2,9 +2,18 @@ import "./add.css";
 import AddImage from "../../assets/addImage.jpg";
 import { useState } from "react";
 import axios from "axios";
+import { app } from "../../firebase.js";
+import {
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadBytesResumable,
+} from "firebase/storage";
+import { useRef } from "react";
+import { useEffect } from "react";
 
 const Add = () => {
-  const [image, setImage] = useState(false);
+  const [image, setImage] = useState(undefined);
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -12,6 +21,30 @@ const Add = () => {
     category: "Cake",
   });
   const [error, setError] = useState(null);
+
+  const fileRef = useRef(null);
+
+  useEffect(() => {
+    if (image) {
+      handleFileUpload(image);
+    }
+  }, [image]);
+
+  const handleFileUpload = async (image) => {
+    const storage = getStorage(app);
+    const fileName = new Date().getTime() + image.name;
+    const storageRef = ref(storage, fileName);
+
+    try {
+      const uploadSnapshot = await uploadBytes(storageRef, image);
+
+      const downloadURL = await getDownloadURL(uploadSnapshot.ref);
+
+      setImage(downloadURL);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,7 +65,10 @@ const Add = () => {
     Data.append("category", formData.category);
     Data.append("image", image);
     try {
-      const res = await axios.post("https://cake-shop-backend-klrk.onrender.com/api/food/add", Data);
+      const res = await axios.post(
+        "https://cake-shop-backend-klrk.onrender.com/api/food/add",
+        Data
+      );
       if (res.status === 200) {
         setFormData({
           name: "",
@@ -52,11 +88,16 @@ const Add = () => {
       <form onSubmit={handleSubmit} className="flex-col">
         <div className="add-img-upload flex-col">
           <p>Upload Image</p>
-          <label htmlFor="image">
-            <img src={image ? URL.createObjectURL(image) : AddImage} alt="" />
-          </label>
+
+          <img
+            src={image ? image : AddImage}
+            alt=""
+            onClick={() => fileRef.current.click()}
+          />
+
           <input
             onChange={(e) => setImage(e.target.files[0])}
+            ref={fileRef}
             type="file"
             id="image"
             hidden

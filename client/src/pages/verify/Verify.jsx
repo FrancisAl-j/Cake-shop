@@ -14,7 +14,7 @@ const Verify = () => {
 
   const verifyPayment = async () => {
     const res = await axios.post(
-      `http://localhost:3000/api/order/verify`,
+      `/api/order/verify`,
       {
         success,
         orderId,

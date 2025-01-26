@@ -2,18 +2,14 @@ import foodModel from "../models/foodModel.js";
 import fs from "fs";
 
 const addProduct = async (req, res) => {
-  if (!req.file) {
-    return res.status(400).json({ error: "No file uploaded" });
-  }
-  const { name, price, description, category } = req.body;
-  const image_filename = `${req.file.filename}`;
+  const { name, price, description, category, image } = req.body;
   try {
     const food = new foodModel({
       name,
       description,
       price,
       category,
-      image: image_filename,
+      image,
     });
 
     await food.save();
@@ -109,7 +105,7 @@ const newProduct = async (req, res) => {
 const updateFood = async (req, res) => {
   const { id } = req.params;
   const { name, price, description, category } = req.body;
-  const image_filename = `${req.file.filename}`;
+
   try {
     const existingProduct = await foodModel.findById(id);
     if (!existingProduct) {
