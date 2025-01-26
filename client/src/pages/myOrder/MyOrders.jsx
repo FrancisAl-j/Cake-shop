@@ -3,10 +3,15 @@ import "./myOrder.css";
 import { StoreContext } from "../../context/StoreContext";
 import axios from "axios";
 import Parcel from "../../assets/parcel.svg";
+import Receipt from "./receipt/Receipt";
 
 const MyOrders = () => {
   const { token } = useContext(StoreContext);
   const [data, setData] = useState([]);
+  const url = "https://cake-shop-backend-klrk.onrender.com";
+  const [orderId, setOrderId] = useState(null);
+
+  //
 
   useEffect(() => {
     if (token) {
@@ -16,10 +21,9 @@ const MyOrders = () => {
 
   const fetchOrders = async () => {
     try {
-      const res = await axios.get(
-        "https://cake-shop-backend-klrk.onrender.com/api/order/userorders",
-        { headers: { token } }
-      );
+      const res = await axios.get(`${url}/api/order/userorders`, {
+        headers: { token },
+      });
 
       if (res.status === 200) {
         setData(res.data);
@@ -51,7 +55,7 @@ const MyOrders = () => {
         {data.map((order, index) => {
           return (
             <div key={index} className="my-orders-order">
-              <img src={Parcel} alt="" />
+              <img src={Parcel} alt="" onClick={() => setOrderId(order._id)} />
               <p>
                 {order.items.map((item, index) => {
                   if (index === order.items.length - 1) {
@@ -69,6 +73,9 @@ const MyOrders = () => {
               <button onClick={() => handleCancelOrder(order._id)}>
                 Cancel Order
               </button>
+              {orderId === order._id && (
+                <Receipt id={order._id} setOrderId={setOrderId} />
+              )}
             </div>
           );
         })}

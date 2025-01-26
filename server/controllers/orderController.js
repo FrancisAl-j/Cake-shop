@@ -301,6 +301,20 @@ const orderCOD = async (req, res) => {
   }
 };
 
+const orderReceipt = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const order = await Order.findById(id);
+    if (!order) {
+      return res.status(404).json({ message: "Order not found." });
+    }
+
+    res.status(200).json(order);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 export default {
   placeOrder,
   verifyOrder,
@@ -310,4 +324,5 @@ export default {
   cancelOrder,
   allOrders,
   orderCOD,
+  orderReceipt,
 };

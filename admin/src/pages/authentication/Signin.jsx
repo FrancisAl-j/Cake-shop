@@ -103,17 +103,6 @@ const Signin = ({ token, setToken }) => {
             )}
           </section>
           <button>{formState === "signin" ? "Sign in" : "Sign up"}</button>
-          {formState === "signin" ? (
-            <p>
-              Don't have an account?{" "}
-              <span onClick={() => setFormState("signup")}>Sign up here.</span>
-            </p>
-          ) : (
-            <p>
-              Already have an account?{" "}
-              <span onClick={() => setFormState("signin")}>Sign in here</span>
-            </p>
-          )}
 
           {error && <p className="error">{error}</p>}
         </form>

@@ -15,7 +15,8 @@ const LoginPopUp = ({ setShowLogin }) => {
     password: "",
   });
   const [error, setError] = useState(null);
-
+  const api = "https://cake-shop-backend-klrk.onrender.com";
+  //https://cake-shop-backend-klrk.onrender.com
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -30,9 +31,9 @@ const LoginPopUp = ({ setShowLogin }) => {
     let url;
     try {
       if (currState === "Sign Up") {
-        url = "https://cake-shop-backend-klrk.onrender.com/api/user/register";
+        url = `${api}/api/user/register`;
       } else {
-        url = "https://cake-shop-backend-klrk.onrender.com/api/user/login";
+        url = `${api}/api/user/login`;
       }
 
       const res = await axios.post(url, formData);
