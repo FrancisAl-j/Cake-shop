@@ -49,18 +49,17 @@ const StoreContextProvider = (props) => {
   };
 
   const getTotalCartAmount = () => {
-    if (!food_list.length) return 0; // If food list isn't loaded yet, return 0
+    if (!food_list.length || !Object.keys(cartItems).length) return 0; // Handle cases where data might not be fully loaded
 
     let totalAmount = 0;
     for (const item in cartItems) {
       if (cartItems[item] > 0) {
         let foodInfo = food_list.find((product) => product._id === item);
         if (foodInfo) {
-          //totalAmount += foodInfo.price * cartItems[item];
           const sale = sales.find((saleItem) =>
             saleItem.products.includes(item)
           );
-          const saleRate = sale ? sale.saleRate : 1; // Use saleRate if on sale, otherwise 1 (no discount)
+          const saleRate = sale ? sale.saleRate : 1; // Use saleRate if on sale, otherwise default to 1 (no discount)
           totalAmount += foodInfo.price * cartItems[item] * saleRate;
         }
       }
@@ -107,7 +106,9 @@ const StoreContextProvider = (props) => {
 
   const fetchFood = async () => {
     try {
-      const res = await axios.get("https://cake-shop-backend-klrk.onrender.com/api/food/list");
+      const res = await axios.get(
+        "https://cake-shop-backend-klrk.onrender.com/api/food/list"
+      );
       if (res.status === 200) {
         setCartItemDetails(res.data);
       }
@@ -135,7 +136,9 @@ const StoreContextProvider = (props) => {
 
   const fetchSaleCakes = async () => {
     try {
-      const res = await axios.get("https://cake-shop-backend-klrk.onrender.com/api/sales/all");
+      const res = await axios.get(
+        "https://cake-shop-backend-klrk.onrender.com/api/sales/all"
+      );
 
       if (res.status === 200) {
         setSales(res.data);
