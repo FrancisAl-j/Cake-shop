@@ -20,14 +20,13 @@ if (!fs.existsSync(uploadDir)) {
 // Image storage engine
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    // Ensure the uploads folder exists before saving the file
-    if (!fs.existsSync(uploadDir)) {
-      fs.mkdirSync(uploadDir, { recursive: true });
-    }
-    cb(null, uploadDir);
+    const absolutePath = path.resolve(uploadDir);
+    console.log("Destination folder:", absolutePath); // Debugging
+    cb(null, absolutePath);
   },
   filename: (req, file, cb) => {
-    cb(null, `${Date.now()}${file.originalname}`);
+    console.log("Uploading file:", file.originalname); // Debugging
+    cb(null, `${Date.now()}-${file.originalname}`);
   },
 });
 
