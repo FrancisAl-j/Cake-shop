@@ -20,6 +20,7 @@ const UpdateCake = ({
     image: productImage,
     category: category,
   });
+  const [error, setError] = useState(null);
 
   const fileRef = useRef(null);
 
@@ -53,7 +54,10 @@ const UpdateCake = ({
         setProductId(null);
       }
     } catch (error) {
-      console.log(error);
+      if (error.response && error.response.data) {
+        const { message } = error.response.data;
+        setError(message);
+      }
     }
   };
 
@@ -122,6 +126,7 @@ const UpdateCake = ({
           ></textarea>
         </section>
         <button>Update</button>
+        {error && <p className="error">{error}</p>}
       </form>
     </div>
   );
