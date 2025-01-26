@@ -58,17 +58,20 @@ const Add = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const Data = new FormData();
     const priceNumber = Number(formData.price);
-    Data.append("name", formData.name);
-    Data.append("description", formData.description);
-    Data.append("price", priceNumber);
-    Data.append("category", formData.category);
-    Data.append("image", image);
+
+    // Prepare the data object
+    const data = {
+      name: formData.name,
+      description: formData.description,
+      price: priceNumber,
+      category: formData.category,
+      image: image, // This is the image URL from Firebase
+    };
     try {
       const res = await axios.post(
         "https://cake-shop-backend-klrk.onrender.com/api/food/add",
-        Data
+        data
       );
       if (res.status === 200) {
         setFormData({
