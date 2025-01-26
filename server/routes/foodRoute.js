@@ -1,32 +1,14 @@
 import express from "express";
 import controller from "../controllers/foodController.js";
 import multer from "multer";
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
 
 const router = express.Router();
 
-// Resolve __dirname for ES Modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// Ensure the uploads folder exists
-const uploadDir = path.join(__dirname, "../uploads");
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true });
-}
-
 // Image storage engine
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    const absolutePath = path.resolve(uploadDir);
-    console.log("Destination folder:", absolutePath); // Debugging
-    cb(null, absolutePath);
-  },
+  destination: "uploads",
   filename: (req, file, cb) => {
-    console.log("Uploading file:", file.originalname); // Debugging
-    cb(null, `${Date.now()}-${file.originalname}`);
+    return cb(null, `${Date.now()}${file.originalname}`);
   },
 });
 
