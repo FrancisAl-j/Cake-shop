@@ -114,12 +114,16 @@ const updateFood = async (req, res) => {
   const { name, price, description, category } = req.body;
   const image_filename = `${req.file.filename}`;
   try {
+    const existingProduct = await foodModel.findById(id);
+    if (!existingProduct) {
+      return res.status(404).json({ error: "Product not found" });
+    }
     const updatedData = {
       name,
       price,
       description,
       category,
-      image: image_filename,
+      image: req.file ? req.file.filename : existingProduct.image,
     };
     const product = await foodModel.findByIdAndUpdate(id, updatedData, {
       new: true,
