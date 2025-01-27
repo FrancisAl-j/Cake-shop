@@ -25,7 +25,8 @@ const TopFoods = () => {
 
   return (
     <div className="top-container">
-      <h1>Top products</h1>
+      {topProducts.length !== 0 && <h1>Top products</h1>}
+
       <div className="item-wrapper">
         {topProducts.map((item, index) => {
           return (
