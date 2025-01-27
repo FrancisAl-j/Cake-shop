@@ -7,6 +7,7 @@ import Orders from "./pages/orders/Orders";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Signin from "./pages/authentication/Signin";
 import SalesProducts from "./pages/dashboard/productsBought/sales/SalesProducts";
+import PrivateRoute from "./components/PrivateRoute";
 
 // Necessary for toastifying messages
 import { useState } from "react";
@@ -21,15 +22,18 @@ const App = () => {
       <div className="app-content">
         <Sidebar token={token} />
         <Routes>
-          <Route path="/add" element={<Add />} />
-          <Route path="/list" element={<List />} />
-          <Route path="/orders" element={<Orders />} />
-          <Route path="/dashboard" element={<Dashboard token={token} />} />
           <Route
             path="/"
             element={<Signin setToken={setToken} token={token} />}
           />
-          <Route path="/sales" element={<SalesProducts token={token} />} />
+
+          <Route element={<PrivateRoute token={token} />}>
+            <Route path="/add" element={<Add />} />
+            <Route path="/list" element={<List />} />
+            <Route path="/orders" element={<Orders />} />
+            <Route path="/dashboard" element={<Dashboard token={token} />} />
+            <Route path="/sales" element={<SalesProducts token={token} />} />
+          </Route>
         </Routes>
       </div>
     </div>
