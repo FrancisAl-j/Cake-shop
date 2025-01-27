@@ -22,6 +22,16 @@
   aspect-ratio: 1/1;
   height: 50px;
 }
+.list-table-format .actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.list-table-format .actions button {
+  padding: 6px 10px;
+  border-radius: 20px;
+  background: var(--nav-text);
+}
 
 @media (max-width: 600px) {
   .list-table-format {
