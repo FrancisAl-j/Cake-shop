@@ -13,7 +13,6 @@
 }
 .item-wrapper {
   display: flex;
-  justify-content: space-between;
   overflow-x: scroll;
   gap: 30px;
   padding: 10px;
