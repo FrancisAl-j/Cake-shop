@@ -28,11 +28,7 @@ const FoodItem = ({ id, name, price, description, image, salePrice, rate }) => {
           </div>
         )}
 
-        <img
-          className="food-item-image"
-          src={`https://cake-shop-backend-klrk.onrender.com/images/${image}`}
-          alt=""
-        />
+        <img className="food-item-image" src={image} alt="" />
         {!cartItems[id] ? (
           <div className="plus-container">
             <img

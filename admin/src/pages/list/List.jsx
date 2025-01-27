@@ -58,10 +58,7 @@ const List = () => {
       {foods.map((food, index) => {
         return (
           <div key={index} className="list-table-format">
-            <img
-              src={`https://cake-shop-backend-klrk.onrender.com/images/${food.image}`}
-              alt=""
-            />
+            <img src={food.image} alt="" />
             <p>{food.name}</p>
             <p>{food.category}</p>
             <p>₱{food.price}</p>
