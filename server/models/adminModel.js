@@ -24,7 +24,7 @@ const adminSchema = new mongoose.Schema({
   },
   active: {
     type: String,
-    default: false,
+    default: true,
   },
 });
 
