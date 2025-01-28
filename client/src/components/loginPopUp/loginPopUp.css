@@ -4,6 +4,7 @@
   --light-shade: #f0d7a7;
   --tan: #9c634f;
   --light-brown: #c37960;
+  --pink: #ff6666;
 }
 
 .login-popup {
@@ -18,7 +19,7 @@
 }
 .login-popup-container {
   width: min(100% - 30px, 370px);
-  background: var(--dark-brown);
+  background: var(--pink);
   color: var(--nav-text);
   display: flex;
   flex-direction: column;
@@ -73,5 +74,10 @@
 .error {
   width: 100%;
   background: red;
+  color: #fff;
+}
+.success {
+  width: 100%;
+  background: green;
   color: #fff;
 }

@@ -15,6 +15,7 @@ const LoginPopUp = ({ setShowLogin }) => {
     password: "",
   });
   const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
   const api = "https://cake-shop-backend-klrk.onrender.com";
   //https://cake-shop-backend-klrk.onrender.com
   const handleChange = (e) => {
@@ -41,6 +42,13 @@ const LoginPopUp = ({ setShowLogin }) => {
       if (currState === "Sign Up") {
         if (res.status === 200) {
           setCurrState("Login");
+          setSuccess("Register successfully.");
+          setError(null);
+          setFormData({
+            name: "",
+            email: "",
+            password: "",
+          });
         }
       }
 
@@ -123,6 +131,7 @@ const LoginPopUp = ({ setShowLogin }) => {
           </p>
         )}
         {error && <p className="error">{error}</p>}
+        {success && <p className="success">{success}</p>}
       </form>
     </div>
   );

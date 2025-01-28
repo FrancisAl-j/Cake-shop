@@ -43,10 +43,7 @@ const Cart = () => {
               return (
                 <div key={index}>
                   <div className="cart-items-title cart-items-item">
-                    <img
-                      src={`https://cake-shop-backend-klrk.onrender.com/images/${item.image}`}
-                      alt=""
-                    />
+                    <img src={item.image} alt="" />
                     <p>{item.name}</p>
                     <p>₱ {salePrice}</p>
                     <p>{cartItems[item._id]}</p>
