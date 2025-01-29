@@ -89,7 +89,7 @@ const newProduct = async (req, res) => {
   const currentDate = new Date();
   const weekAgo = new Date(currentDate.setDate(currentDate.getDate() - 7));
   try {
-    const foods = await foodModel.find();
+    const foods = await foodModel.find().sort({ createdAt: -1 });
 
     const newFoods = foods.filter((food) => {
       return new Date(food.createdAt) >= weekAgo;
