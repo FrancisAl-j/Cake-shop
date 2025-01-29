@@ -95,7 +95,9 @@ const newProduct = async (req, res) => {
       return new Date(food.createdAt) >= weekAgo;
     });
 
-    res.status(200).json(newFoods);
+    const results = newFoods.slice(0, 5);
+
+    res.status(200).json(results);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
